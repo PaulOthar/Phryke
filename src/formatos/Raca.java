@@ -8,7 +8,7 @@ public class Raca extends Formato {
 	//Algums racas podem variar em custo dentro dos mesmos parametros,oq significa q a pessoa deve optar pelo custo personalizado
 	private ArrayList<Double> custo;
 	//Racas Podem Dar Bonus em certas caracteristicas, e como nao sabemos quais caracteristicas estamos brincando, eu usei ArrayList
-	private ArrayList<Double> caracteristicasbonus;
+	private ArrayList<Caracteristica> caracteristicasbonus;
 	/*
 	Peculiaridades seriam como perks, a habilidade de voar, por exemplo, ou ter um braco mecanico...
 	Cada sistema pode variar com peculiaridades, pretendo englobar ate magia
@@ -31,13 +31,13 @@ public class Raca extends Formato {
 		this.setDescricao(new String());
 		this.setSuperraca(new String());
 		this.setSistema(new String());
-		this.setCaracteristicasbonus(new ArrayList<Double>());
+		this.setCaracteristicasbonus(new ArrayList<Caracteristica>());
 	}
 	public Raca(String nome) {
 		this.setDescricao(new String());
 		this.setSuperraca(new String());
 		this.setSistema(new String());
-		this.setCaracteristicasbonus(new ArrayList<Double>());
+		this.setCaracteristicasbonus(new ArrayList<Caracteristica>());
 		super.setNome(nome);
 	}
 	public Raca(String nome,String descricao,String superraca,String sistema) {
@@ -45,7 +45,7 @@ public class Raca extends Formato {
 		this.setDescricao(descricao);
 		this.setSuperraca(superraca);
 		this.setSistema(sistema);
-		this.setCaracteristicasbonus(new ArrayList<Double>());
+		this.setCaracteristicasbonus(new ArrayList<Caracteristica>());
 	}
 	
 	public void CriarSegmentoDePeculiaridade(String nomesegmento) {
@@ -56,6 +56,22 @@ public class Raca extends Formato {
 			if(this.getPeculiaridades().get(i).isEmpty()) {
 				//quando achar-mos o segmento vazio, inserimos o nome do segmento e encerramos o metodo
 				this.getPeculiaridades().get(i).add(nomesegmento);
+				return;
+			}
+		}
+	}
+	public void EditarNomeDoSegmento(String nomesegmentoinicial,String nomesegmentoatual) {
+		for(int i = 0;i<this.getPeculiaridades().size();i++) {
+			if(this.getPeculiaridades().get(i).get(0).contentEquals(nomesegmentoinicial)) {
+				this.getPeculiaridades().get(i).set(0, nomesegmentoatual);
+				return;
+			}
+		}
+	}
+	public void RemoverSegmento(String nomesegmento) {
+		for(int i = 0;i<this.getPeculiaridades().size();i++) {
+			if(this.getPeculiaridades().get(i).get(0).contentEquals(nomesegmento)) {
+				this.getPeculiaridades().remove(i);
 				return;
 			}
 		}
@@ -71,6 +87,20 @@ public class Raca extends Formato {
 			}
 		}
 	}
+	public void EditarPeculiaridadeNoSegmento(String nomesegmento,String nomepeculiaridadeinicial,String nomepeculiaridadeatual) {
+		for(int i = 0;i<this.getPeculiaridades().size();i++) {
+			if(this.getPeculiaridades().get(i).get(0).equals(nomesegmento)) {
+				for(int ii = 0;ii<this.getPeculiaridades().get(i).size();i++) {
+					if(this.getPeculiaridades().get(i).get(ii).contentEquals(nomepeculiaridadeinicial)) {
+						this.getPeculiaridades().get(i).set(ii, nomepeculiaridadeatual);
+						return;
+					}
+				}
+			}
+		}
+	}
+	/*
+	@Deprecated
 	public void RemoverPeculiaridadeNoSegmento(String nomesegmento,String nomepeculiaridade) {
 		//Percorremos as colunas de peculiaridades(Aonde ficam os nomes dos segmentos)
 				for(int i = 0;i<this.getPeculiaridades().size();i++) {
@@ -98,9 +128,53 @@ public class Raca extends Formato {
 					}
 				}
 	}
+	*/
+	public void RemoverPeculiaridadeNoSegmento(String nomesegmento,String nomepeculiaridade) {
+		for(int i = 0;i<this.getPeculiaridades().size();i++) {
+			if(this.getPeculiaridades().get(i).get(0).equals(nomesegmento)) {
+				this.getPeculiaridades().get(i).remove(nomepeculiaridade);
+			}
+		}
+	}
+	
+	public void CriarCaracteristicaBonus(String nomedacaracteristica) {
+		this.getCaracteristicasbonus().add(new Caracteristica(nomedacaracteristica));
+	}
+	public void InserirValorNaCaracteristica(String nomedacaracteristica,Double valor) {
+		for(int i = 0;i<this.getCaracteristicasbonus().size();i++) {
+			if(this.getCaracteristicasbonus().get(i).getNome().contentEquals(nomedacaracteristica)) {
+				this.getCaracteristicasbonus().get(i).setValor(valor);
+			}
+		}
+	}
+	public void EditarCaracteristica(String nomedacaracteristicainicial,String nomedacaracteristicaatual) {
+		for(int i = 0;i<this.getCaracteristicasbonus().size();i++) {
+			if(this.getCaracteristicasbonus().get(i).getNome().contentEquals(nomedacaracteristicainicial)) {
+				this.getCaracteristicasbonus().get(i).setNome(nomedacaracteristicaatual);;
+			}
+		}
+	}
+	public void RemoverCaracteristica(String nomedacaracteristica) {
+		for(int i = 0;i<this.getCaracteristicasbonus().size();i++) {
+			if(this.getCaracteristicasbonus().get(i).getNome().contentEquals(nomedacaracteristica)) {
+				this.getCaracteristicasbonus().remove(i);
+			}
+		}
+	}
 	
 	public void InserirCusto(double custo) {
 		this.getCusto().add(custo);
+	}
+	public void EditarCusto(double custoinicial,double custoatual) {
+		for(int i = 0;i<this.getCusto().size();i++) {
+			if(this.getCusto().get(i).equals(custoinicial)) {
+				this.getCusto().set(i, custoatual);
+				return;
+			}
+		}
+	}
+	public void RemoverCusto(double custo) {
+		this.getCusto().remove(custo);
 	}
 	
 	public String getDescricao() {
@@ -115,7 +189,7 @@ public class Raca extends Formato {
 	public ArrayList<Double> getCusto() {
 		return custo;
 	}
-	public ArrayList<Double> getCaracteristicasbonus() {
+	public ArrayList<Caracteristica> getCaracteristicasbonus() {
 		return caracteristicasbonus;
 	}
 	public ArrayList<ArrayList<String>> getPeculiaridades() {
@@ -134,7 +208,7 @@ public class Raca extends Formato {
 	public void setCusto(ArrayList<Double> custo) {
 		this.custo = custo;
 	}
-	public void setCaracteristicasbonus(ArrayList<Double> caracteristicasbonus) {
+	public void setCaracteristicasbonus(ArrayList<Caracteristica> caracteristicasbonus) {
 		this.caracteristicasbonus = caracteristicasbonus;
 	}
 	public void setPeculiaridades(ArrayList<ArrayList<String>> peculiaridades) {
