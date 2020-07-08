@@ -32,6 +32,7 @@ public class Caracteristica extends Formato {
 	//Lembrar de implementar
 	public void DefinirRegra(String regra) {
 		//Recebe uma equacao, que formata os valores e as operacoes, e sussetivamente faz o resultado 
+		
 	}
 	//Lembrar de implementar
 	public double CalcularCaracteristicaViaRegra(ArrayList<Double> valores) {
