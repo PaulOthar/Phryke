@@ -1,7 +1,5 @@
 package main;
 
-import ferramentas.Matematica;
-
 //Classe Main deve ser usada apenas para trabalhar com recursos de instancia maior
 public class Main {
 
