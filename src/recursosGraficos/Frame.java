@@ -88,6 +88,7 @@ public class Frame {
         return menu;
     }
 	
+	@Deprecated
 	public static JMenu MenuElementar() {
 		JMenu menu = new JMenu();
 		menu.setText("Elementos");
