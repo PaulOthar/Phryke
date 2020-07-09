@@ -1,5 +1,6 @@
 package recursosGraficos;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -26,14 +28,16 @@ public class Frame {
 		tela.setVisible(true);
 	}
 	public static void Rodar() {
-		AtualizarStatus();
+		InicializarStatus();
 		BasicoDaTela();
 	}
 	
 	public static JMenuBar Menu(){
         JMenuBar menu = new JMenuBar();
         menu.add(MenuElementar());
-        menu.add(MenuDeAbas());
+        menu.add(MenuOpcoes());
+        
+        menu.add(Memenu());
         return menu;
     }
 	public static JMenu MenuElementar() {
@@ -108,89 +112,402 @@ public class Frame {
 		op.get(7).add(opp.get(18));
 		op.get(7).add(opp.get(19));
 		
+		//Todos os Mini-Menus, inseridos no menu, dentro da barra
 		for(JMenuItem menui : op) {
 			menu.add(menui);
 		}
+		//Fechar tudo
+		opp.add(new JMenuItem("Fechar Tudo"));
+		menu.add(opp.get(20));
+		
 		opp.get(0).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Criar Sistema",0,new JPanel());
+				
+				//Se For Verdade
+				if(status.get(0)) {
+					op.get(0).setForeground(Color.RED);
+					opp.get(0).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(1) == false) {
+						op.get(0).setForeground(Color.BLACK);
+					}
+					opp.get(0).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(1).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Consultar Sistema",1,new JPanel());
+				
+				//Se For Verdade
+				if(status.get(1)) {
+					op.get(0).setForeground(Color.RED);
+					opp.get(1).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(0) == false) {
+						op.get(0).setForeground(Color.BLACK);
+					}
+					opp.get(1).setForeground(Color.BLACK);
+				}
+				
 			}});
+		
 		opp.get(2).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Criar Peculiaridade",2,new JPanel());
+
+				//Se For Verdade
+				if(status.get(2)) {
+					op.get(1).setForeground(Color.RED);
+					opp.get(2).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(3) == false) {
+						op.get(1).setForeground(Color.BLACK);
+					}
+					opp.get(2).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(3).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Consultar Peculiaridade",3,new JPanel());
+
+				//Se For Verdade
+				if(status.get(3)) {
+					op.get(1).setForeground(Color.RED);
+					opp.get(3).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(2) == false) {
+						op.get(1).setForeground(Color.BLACK);
+					}
+					opp.get(3).setForeground(Color.BLACK);
+				}
+				
 			}});
+		
 		opp.get(4).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Criar Caracteristica",4,new JPanel());
+
+				//Se For Verdade
+				if(status.get(4)) {
+					op.get(2).setForeground(Color.RED);
+					opp.get(4).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(5) == false) {
+						op.get(2).setForeground(Color.BLACK);
+					}
+					opp.get(4).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(5).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Consultar Caracteristica",5,new JPanel());
+
+				//Se For Verdade
+				if(status.get(5)) {
+					op.get(2).setForeground(Color.RED);
+					opp.get(5).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(4) == false) {
+						op.get(2).setForeground(Color.BLACK);
+					}
+					opp.get(5).setForeground(Color.BLACK);
+				}
+				
 			}});
+		
 		opp.get(6).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Criar Raca",6,new JPanel());
+
+				//Se For Verdade
+				if(status.get(6)) {
+					op.get(3).setForeground(Color.RED);
+					opp.get(6).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(7) == false && status.get(8) == false && status.get(9) == false) {
+						op.get(3).setForeground(Color.BLACK);
+					}
+					opp.get(6).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(7).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Criar Super Raca",7,new JPanel());
+
+				//Se For Verdade
+				if(status.get(7)) {
+					op.get(3).setForeground(Color.RED);
+					opp.get(7).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(6) == false && status.get(8) == false && status.get(9) == false) {
+						op.get(3).setForeground(Color.BLACK);
+					}
+					opp.get(7).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(8).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Consultar Raca",8,new JPanel());
+
+				//Se For Verdade
+				if(status.get(8)) {
+					op.get(3).setForeground(Color.RED);
+					opp.get(8).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(6) == false && status.get(7) == false && status.get(9) == false) {
+						op.get(3).setForeground(Color.BLACK);
+					}
+					opp.get(8).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(9).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Consultar Super Raca",9,new JPanel());
+
+				//Se For Verdade
+				if(status.get(9)) {
+					op.get(3).setForeground(Color.RED);
+					opp.get(9).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(6) == false && status.get(7) == false && status.get(8) == false) {
+						op.get(3).setForeground(Color.BLACK);
+					}
+					opp.get(9).setForeground(Color.BLACK);
+				}
+				
 			}});
+		
 		opp.get(10).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Criar Item",10,new JPanel());
+
+				//Se For Verdade
+				if(status.get(10)) {
+					op.get(4).setForeground(Color.RED);
+					opp.get(10).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(11) == false) {
+						op.get(4).setForeground(Color.BLACK);
+					}
+					opp.get(10).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(11).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Consultar Item",11,new JPanel());
+
+				//Se For Verdade
+				if(status.get(11)) {
+					op.get(4).setForeground(Color.RED);
+					opp.get(11).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(10) == false) {
+						op.get(4).setForeground(Color.BLACK);
+					}
+					opp.get(11).setForeground(Color.BLACK);
+				}
+				
 			}});
+		
 		opp.get(12).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Criar Magia",12,new JPanel());
+
+				//Se For Verdade
+				if(status.get(12)) {
+					op.get(5).setForeground(Color.RED);
+					opp.get(12).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(13) == false && status.get(14) == false && status.get(15) == false) {
+						op.get(5).setForeground(Color.BLACK);
+					}
+					opp.get(12).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(13).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Criar Escola",13,new JPanel());
+
+				//Se For Verdade
+				if(status.get(13)) {
+					op.get(5).setForeground(Color.RED);
+					opp.get(13).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(12) == false && status.get(14) == false && status.get(15) == false) {
+						op.get(5).setForeground(Color.BLACK);
+					}
+					opp.get(13).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(14).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Consultar Magia",14,new JPanel());
+
+				//Se For Verdade
+				if(status.get(14)) {
+					op.get(5).setForeground(Color.RED);
+					opp.get(14).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(12) == false && status.get(12) == false && status.get(15) == false) {
+						op.get(5).setForeground(Color.BLACK);
+					}
+					opp.get(14).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(15).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Consultar Escola",15,new JPanel());
+
+				//Se For Verdade
+				if(status.get(15)) {
+					op.get(5).setForeground(Color.RED);
+					opp.get(15).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(12) == false && status.get(13) == false && status.get(14) == false) {
+						op.get(5).setForeground(Color.BLACK);
+					}
+					opp.get(15).setForeground(Color.BLACK);
+				}
+				
 			}});
+		
 		opp.get(16).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Criar Criatura",16,new JPanel());
+
+				//Se For Verdade
+				if(status.get(16)) {
+					op.get(6).setForeground(Color.RED);
+					opp.get(16).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(17) == false) {
+						op.get(6).setForeground(Color.BLACK);
+					}
+					opp.get(16).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(17).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Consultar Criatura",17,new JPanel());
+
+				//Se For Verdade
+				if(status.get(17)) {
+					op.get(6).setForeground(Color.RED);
+					opp.get(17).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(16) == false) {
+						op.get(6).setForeground(Color.BLACK);
+					}
+					opp.get(17).setForeground(Color.BLACK);
+				}
+				
 			}});
+		
 		opp.get(18).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Criar Ficha",18,new JPanel());
+
+				//Se For Verdade
+				if(status.get(18)) {
+					op.get(7).setForeground(Color.RED);
+					opp.get(18).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(19) == false) {
+						op.get(7).setForeground(Color.BLACK);
+					}
+					opp.get(18).setForeground(Color.BLACK);
+				}
+				
 			}});
 		opp.get(19).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UsarAba("Consultar Ficha",19,new JPanel());
+
+				//Se For Verdade
+				if(status.get(19)) {
+					op.get(7).setForeground(Color.RED);
+					opp.get(19).setForeground(Color.RED);
+				}
+				//Se For Falso
+				else {
+					if(status.get(18) == false) {
+						op.get(7).setForeground(Color.BLACK);
+					}
+					opp.get(19).setForeground(Color.BLACK);
+				}
+				
 			}});
+		
+		opp.get(20).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(int i = 0;i<op.size();i++) {
+					op.get(i).setForeground(Color.BLACK);
+				}
+				for(int i = 0;i<opp.size();i++) {
+					opp.get(i).setForeground(Color.BLACK);
+				}
+				abas.removeAll();
+				PadronizarStatus(false);
+			}});
+		
+		return menu;
+	}
+	public static JMenu MenuOpcoes() {
+		JMenu menu = new JMenu();
+		menu.setText("Opcoes");
+		
+		menu.add(MenuDeAbas());
+		menu.add(MenuDeEstilos());
 		
 		return menu;
 	}
@@ -226,12 +543,68 @@ public class Frame {
 		}
 		
 		return menu;
+	}
+	public static JMenu MenuDeEstilos() {
+		JMenu menu = new JMenu();
+		menu.setText("Estilo Ja Janela");
+		ArrayList<JMenuItem> op = new ArrayList<JMenuItem>();
 		
+		op.add(new JMenuItem("Metal"));
+		op.add(new JMenuItem("Nimbus"));
+		op.add(new JMenuItem("CDE/Motif"));
+		op.add(new JMenuItem("Windows"));
+		op.add(new JMenuItem("Windows Classic"));
+		
+		
+		
+		op.get(0).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefinirEstilo("Metal");
+			}});
+		op.get(1).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefinirEstilo("Nimbus");
+			}});
+		op.get(2).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefinirEstilo("CDE/Motif");
+			}});
+		op.get(3).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefinirEstilo("Windows");
+			}});
+		op.get(4).addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefinirEstilo("Windows Classic");
+			}});
+		
+		for(JMenuItem m : op) {
+			menu.add(m);
+		}
+		
+		return menu;
 	}
 	
-	public static void AtualizarStatus() {
+	public static JMenu Memenu() {
+		//Meu Proprio Easter Egg, Com jogos e Pr*********!
+		JMenu menu = new JMenu("Ajuda");
+		JMenuItem meme = new JMenuItem("Te Vira");
+		meme.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Nao e problema meu, te vira kkkk");
+			}});
+		menu.add(meme);
+		return menu;
+	}
+	
+	public static void InicializarStatus() {
 		for(int i = 0;i<20;i++) {
 			status.add(false);
+		}
+	}
+	public static void PadronizarStatus(boolean b) {
+		for(int i = 0;i<20;i++) {
+			status.set(i,b);
 		}
 	}
 	public static void UsarAba(String titulo,int index,JPanel painel) {
@@ -264,4 +637,18 @@ public class Frame {
 				break;
 		}
 	}
+	public static void DefinirEstilo(String lnf){
+        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if (lnf.equals(info.getName())) {
+                    try {
+                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                        javax.swing.SwingUtilities.updateComponentTreeUI(tela);
+                    } catch (Exception e) {
+                    	return;
+                    }
+                    
+                    break;
+                }
+            }
+    }
 }
