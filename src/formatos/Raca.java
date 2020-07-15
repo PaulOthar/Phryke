@@ -28,12 +28,16 @@ public class Raca extends Formato {
 	private ArrayList<ArrayList<String>> peculiaridades;
 	
 	public Raca() {
+		this.setCusto(new ArrayList<Double>());
+		this.setPeculiaridades(new ArrayList<ArrayList<String>>());
 		this.setDescricao(new String());
 		this.setSuperraca(new String());
 		this.setSistema(new String());
 		this.setCaracteristicasbonus(new ArrayList<Caracteristica>());
 	}
 	public Raca(String nome) {
+		this.setCusto(new ArrayList<Double>());
+		this.setPeculiaridades(new ArrayList<ArrayList<String>>());
 		this.setDescricao(new String());
 		this.setSuperraca(new String());
 		this.setSistema(new String());
@@ -41,6 +45,8 @@ public class Raca extends Formato {
 		super.setNome(nome);
 	}
 	public Raca(String nome,String descricao,String superraca,String sistema) {
+		this.setCusto(new ArrayList<Double>());
+		this.setPeculiaridades(new ArrayList<ArrayList<String>>());
 		super.setNome(nome);
 		this.setDescricao(descricao);
 		this.setSuperraca(superraca);
@@ -214,4 +220,115 @@ public class Raca extends Formato {
 	public void setPeculiaridades(ArrayList<ArrayList<String>> peculiaridades) {
 		this.peculiaridades = peculiaridades;
 	}
+
+	public String DeDadosParaCodigo() {
+		String Codigo = "",Custo = "",Caracteristica = "",peculiaridades = "";
+		
+		for(Double c : this.getCusto()) {
+			if(!Custo.isBlank()) {
+				Custo = Custo + secundario;
+			}
+			Custo = Custo + c;
+		}
+		
+		for(Caracteristica c : this.getCaracteristicasbonus()) {
+			if(!Caracteristica.isBlank()) {
+				Caracteristica = Caracteristica + secundario;
+			}
+			Caracteristica = Caracteristica + c.getNome() + terciario + c.getDescricao()  + terciario + c.getRegra()  + terciario + c.getValor()  + terciario + c.getValormaximo()  + terciario + c.getValorminimo();
+		}
+		
+		for(ArrayList<String> arls : this.getPeculiaridades()) {
+			if(!peculiaridades.isBlank()) {
+				peculiaridades = peculiaridades + secundario;
+			}
+			String schindler = "";
+			for(String s : arls) {
+				if(!schindler.isBlank()) {
+					schindler = schindler + terciario;
+				}
+				schindler = schindler + s;
+			}
+			peculiaridades = peculiaridades + schindler;
+		}
+		
+		Codigo = super.getNome()+primario+this.getDescricao()+primario+this.getSuperraca()+primario+this.getSistema()+primario+Custo+primario+Caracteristica+primario+peculiaridades;
+		return Codigo;
+	}
+	@Override
+	public void DeCodigoParaDados(String Codigo) {
+		
+		int contador = 0;
+		
+		for(String s : Codigo.split(primario)) {
+			switch(contador) {
+			case 0:
+				super.setNome(s);
+				break;
+			case 1:
+				this.setDescricao(s);
+				break;
+			case 2:
+				this.setSuperraca(s);
+				break;
+			case 3:
+				this.setSistema(s);
+				break;
+			case 4:
+				for(String ss : s.split(secundario)) {
+					this.InserirCusto(Double.parseDouble(ss));
+				}
+				break;
+			case 5:
+				for(String ss : s.split(secundario)) {
+					
+					Caracteristica c = new Caracteristica();
+					int contadeiro = 0;
+					
+					for(String sss : ss.split(terciario)) {
+						switch(contadeiro) {
+						case 0:
+							c.setNome(sss);
+							break;
+						case 1:
+							c.setDescricao(sss);
+							break;
+						case 2:
+							c.setRegra(sss);
+							break;
+						case 3:
+							c.setValor(Double.parseDouble(sss));
+							break;
+						case 4:
+							c.setValormaximo(Double.parseDouble(sss));
+							break;
+						case 5:
+							c.setValorminimo(Double.parseDouble(sss));
+							break;
+						}
+						contadeiro++;
+					}
+					
+					this.getCaracteristicasbonus().add(c);
+				}
+				break;
+			case 6:
+				for(String ss : s.split(secundario)) {
+					String segmento = "";
+					for(String sss : ss.split(terciario)) {
+						if(segmento.isBlank()) {
+							this.CriarSegmentoDePeculiaridade(sss);
+							segmento = sss;
+						}
+						else {
+							this.InserirPeculiaridadeNoSegmeno(segmento, sss);
+						}
+					}
+				}
+				break;
+			}
+			contador++;
+		}
+	}
+	
 }

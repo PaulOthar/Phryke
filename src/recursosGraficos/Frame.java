@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -19,6 +20,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import ferramentas.Mensageiro;
+import formatos.Regra;
 import recursosLogicos.MeuNomeEhDado;
 
 public class Frame {
@@ -47,6 +49,7 @@ public class Frame {
         JLabel resultado = new JLabel("[   0   ]");
         JSpinner seimor = new JSpinner();
         seimor.setMaximumSize(new Dimension(50,50));
+        seimor.setValue(1);
         
         menu.add(MenuElementar());
         menu.add(MenuOpcoes());
@@ -80,8 +83,8 @@ public class Frame {
 			}});
         seimor.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				if((Integer) seimor.getValue() <= 0) {
-					seimor.setValue(0);
+				if((Integer) seimor.getValue() <= 1) {
+					seimor.setValue(1);
 				}
 			}});
         
@@ -713,6 +716,7 @@ public class Frame {
 		
 		return menu;
 	}
+	
 	
 	public static JMenu Memenu() {
 		//Meu Proprio Easter Egg, Com jogos e Pr*********!

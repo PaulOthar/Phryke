@@ -6,26 +6,110 @@ public class Sistema extends Formato {
 	private String versao;
 	
 	//Alguns sistemas Variam com campos do sistema, como D&D,que tem dextreza, no 3d&t tem habilidade....
-	private ArrayList<String> nomecampos;
-	private ArrayList<Object> campos;
+	//Caracteristicas: Forca, habilidade...
+	//Segmentos: Vantagens..desvantagens...magias...pericias.......
+	private ArrayList<String> caracteristicas,segmentos,regras;
+	
+	public Sistema() {
+		super.setNome(new String());
+		this.setVersao(new String());
+		this.setCaracteristicas(new ArrayList<String>());
+		this.setSegmentos(new ArrayList<String>());
+		this.setRegras(new ArrayList<String>());
+	}
+	
+	public void AdicionarCaracteristicaPorCaracteristica(Caracteristica c) {
+		this.getCaracteristicas().add(c.getNome());
+	}
+	public void AdicionarRegraPorRegra(Regra r) {
+		regras.add(r.getNome());
+	}
 	
 	public String getVersao() {
 		return versao;
 	}
-	public ArrayList<String> getNomecampos() {
-		return nomecampos;
+	public ArrayList<String> getSegmentos() {
+		return segmentos;
 	}
-	public ArrayList<Object> getCampos() {
-		return campos;
+	public ArrayList<String> getCaracteristicas() {
+		return caracteristicas;
+	}
+	public ArrayList<String> getRegras() {
+		return regras;
 	}
 	
 	public void setVersao(String versao) {
 		this.versao = versao;
 	}
-	public void setNomecampos(ArrayList<String> nomecampos) {
-		this.nomecampos = nomecampos;
+	public void setSegmentos(ArrayList<String> segmentos) {
+		this.segmentos = segmentos;
 	}
-	public void setCampos(ArrayList<Object> campos) {
-		this.campos = campos;
+
+	public void setCaracteristicas(ArrayList<String> caracteristicas) {
+		this.caracteristicas = caracteristicas;
+	}
+
+	public void setRegras(ArrayList<String> regras) {
+		this.regras = regras;
+	}
+	
+
+	@Override
+	public String DeDadosParaCodigo() {
+		String codigo = new String(),caracteristicas = new String(),segmentos = new String(),regras = new String();
+		
+		for(String s : this.getCaracteristicas()) {
+			if(!caracteristicas.isBlank()) {
+				caracteristicas = caracteristicas + secundario;
+			}
+			caracteristicas  = caracteristicas + s;
+		}
+		
+		for(String s : this.getSegmentos()) {
+			if(!segmentos.isBlank()) {
+				segmentos = segmentos + secundario;
+			}
+			segmentos = segmentos + s;
+		}
+		
+		for(String s : this.getRegras()) {
+			if(!regras.isBlank()) {
+				regras = regras + secundario;
+			}
+			regras = regras + s;
+		}
+		
+		codigo = this.getVersao()+primario+super.getNome()+primario+caracteristicas+primario+segmentos+primario+regras;
+		return codigo;
+	}
+	@Override
+	public void DeCodigoParaDados(String Codigo) {
+		int contador = 0;
+		for(String s : Codigo.split(primario)) {
+			switch(contador) {
+			case 0:
+				this.setVersao(s);
+				break;
+			case 1:
+				this.setNome(s);
+				break;
+			case 2:
+				for(String ss : s.split(secundario)) {
+					this.getCaracteristicas().add(ss);
+				}
+				break;
+			case 3:
+				for(String ss : s.split(secundario)) {
+					this.getSegmentos().add(ss);
+				}
+				break;
+			case 4:
+				for(String ss : s.split(secundario)) {
+					this.getRegras().add(ss);
+				}
+				break;
+			}
+			contador++;
+		}
 	}
 }
