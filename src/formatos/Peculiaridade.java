@@ -3,19 +3,21 @@ package formatos;
 import java.util.ArrayList;
 
 public class Peculiaridade extends Formato {
-	private String descricao,sistema;
+	private String descricao,sistema,segmento;
 	private ArrayList<Double> custo;
 	
 	public Peculiaridade() {
 		super.setNome(new String());
 		this.setCusto(new ArrayList<Double>());
 		this.setSistema(new String());
+		this.setSegmento(new String());
 		this.setDescricao(new String());
 	}
 	public Peculiaridade(String nome) {
 		super.setNome(nome);
 		this.setCusto(new ArrayList<Double>());
 		this.setSistema(new String());
+		this.setSegmento(new String());
 		this.setDescricao(new String());
 	}
 	
@@ -40,6 +42,9 @@ public class Peculiaridade extends Formato {
 	public String getSistema() {
 		return sistema;
 	}
+	public String getSegmento() {
+		return segmento;
+	}
 	public ArrayList<Double> getCusto() {
 		return custo;
 	}
@@ -49,6 +54,9 @@ public class Peculiaridade extends Formato {
 	}
 	public void setSistema(String sistema) {
 		this.sistema = sistema;
+	}
+	public void setSegmento(String segmento) {
+		this.segmento = segmento;
 	}
 	public void setCusto(ArrayList<Double> custo) {
 		this.custo = custo;
@@ -65,7 +73,7 @@ public class Peculiaridade extends Formato {
 			custo = custo + d;
 		}
 		
-		codigo = super.getNome()+primario+this.getDescricao()+primario+this.getSistema()+primario+custo;
+		codigo = super.getNome()+primario+this.getDescricao()+primario+this.getSistema()+primario+this.getSegmento()+primario+custo;
 		return codigo;
 	
 	}
@@ -84,6 +92,9 @@ public class Peculiaridade extends Formato {
 				this.setSistema(s);
 				break;
 			case 3:
+				this.setSegmento(s);
+				break;
+			case 4:
 				for(String ss : s.split(secundario)) {
 					this.InserirCusto(Double.parseDouble(ss));
 				}

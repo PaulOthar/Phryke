@@ -11,6 +11,7 @@ public class Teste {
 		p.setNome("Ataque Pestilento");
 		p.setDescricao("vc cospe");
 		p.setSistema("3D&T");
+		p.setSegmento("Vantagens");
 		p.InserirCusto(0.0);
 		p.InserirCusto(3.0);
 		Peculiaridade pp = new Peculiaridade();
