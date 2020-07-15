@@ -21,6 +21,18 @@ public class Teste {
 		r.CriarCaracteristicaBonus("Forca");
 		r.InserirValorNaCaracteristica("Forca", 2.0);
 		System.out.println(r.DeDadosParaCodigo());
+		
+		String codigo = r.DeDadosParaCodigo();
+		
+		Raca rr = new Raca();
+		Raca rrr = new Raca();
+		rr.DeCodigoParaDados(new Raca("kek").DeDadosParaCodigo());
+		rrr.DeCodigoParaDados(rr.DeDadosParaCodigo());
+		
+		System.out.println(rr.DeDadosParaCodigo());
+		System.out.println(rrr.DeDadosParaCodigo());
+		
+		System.out.println(new Raca("kek").DeDadosParaCodigo());
 	}
 
 }

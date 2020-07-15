@@ -256,6 +256,85 @@ public class Raca extends Formato {
 		Codigo = super.getNome()+primario+this.getDescricao()+primario+this.getSuperraca()+primario+this.getSistema()+primario+Custo+primario+Caracteristica+primario+peculiaridades;
 		return Codigo;
 	}
+	@Override
+	public void DeCodigoParaDados(String Codigo) {
+		String primario = ";",secundario = "#",terciario = "¬";
+		
+		int contador = 0;
+		
+		for(String s : Codigo.split(primario)) {
+			switch(contador) {
+			case 0:
+				super.setNome(s);
+				break;
+			case 1:
+				this.setDescricao(s);
+				break;
+			case 2:
+				this.setSuperraca(s);
+				break;
+			case 3:
+				this.setSistema(s);
+				break;
+			case 4:
+				for(String ss : s.split(secundario)) {
+					this.InserirCusto(Double.parseDouble(ss));
+				}
+				break;
+			case 5:
+				for(String ss : s.split(secundario)) {
+					
+					Caracteristica c = new Caracteristica();
+					int contadeiro = 0;
+					
+					for(String sss : ss.split(terciario)) {
+						switch(contadeiro) {
+						case 0:
+							c.setNome(sss);
+							break;
+						case 1:
+							c.setDescricao(sss);
+							break;
+						case 2:
+							c.setRegra(sss);
+							break;
+						case 3:
+							c.setValor(Double.parseDouble(sss));
+							break;
+						case 4:
+							c.setValormaximo(Double.parseDouble(sss));
+							break;
+						case 5:
+							c.setValorminimo(Double.parseDouble(sss));
+							break;
+						}
+						contadeiro++;
+					}
+					
+					this.getCaracteristicasbonus().add(c);
+				}
+				break;
+			case 6:
+				for(String ss : s.split(secundario)) {
+					boolean primeiro = true;
+					String segmento = "";
+					for(String sss : ss.split(terciario)) {
+						if(primeiro) {
+							this.CriarSegmentoDePeculiaridade(sss);
+							segmento = sss;
+							primeiro = false;
+						}
+						else {
+							this.InserirPeculiaridadeNoSegmeno(segmento, sss);
+						}
+					}
+				}
+				break;
+			}
+			contador++;
+		}
+	}
+	
 	
 	
 	

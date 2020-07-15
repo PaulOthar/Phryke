@@ -57,6 +57,11 @@ public class Peculiaridade extends Formato {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public void DeCodigoParaDados(String Codigo) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }
