@@ -2,9 +2,16 @@ package recursosGraficosPaineis;
 
 import javax.swing.JPanel;
 
-public abstract class FormatoAba {
+import recursosGraficos.ManipuladorPosicionativo;
+
+public abstract class Pagina {
 	private JPanel painel = new JPanel();
 
+	Pagina() {
+		ManipuladorPosicionativo.Resetar();
+		this.setPainel(new JPanel());
+	}
+	
 	public abstract JPanel GerarPainel();
 	
  	public JPanel getPainel() {

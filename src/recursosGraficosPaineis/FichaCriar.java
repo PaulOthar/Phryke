@@ -2,7 +2,7 @@ package recursosGraficosPaineis;
 
 import javax.swing.JPanel;
 
-public class FichaCriar extends FormatoAba {
+public class FichaCriar extends Pagina {
 
 	@Override
 	public JPanel GerarPainel() {
