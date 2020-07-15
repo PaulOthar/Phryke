@@ -7,15 +7,16 @@ public class Peculiaridade extends Formato {
 	private ArrayList<Double> custo;
 	
 	public Peculiaridade() {
-		custo = new ArrayList<Double>();
-		sistema = new String();
-		descricao = new String();
+		super.setNome(new String());
+		this.setCusto(new ArrayList<Double>());
+		this.setSistema(new String());
+		this.setDescricao(new String());
 	}
 	public Peculiaridade(String nome) {
 		super.setNome(nome);
-		custo = new ArrayList<Double>();
-		sistema = new String();
-		descricao = new String();
+		this.setCusto(new ArrayList<Double>());
+		this.setSistema(new String());
+		this.setDescricao(new String());
 	}
 	
 	public void InserirCusto(double custo) {
@@ -55,15 +56,41 @@ public class Peculiaridade extends Formato {
 	
 	@Override
 	public String DeDadosParaCodigo() {
-		String codigo = "";
+		String codigo = "",custo = "";
 		
-		return null;
+		for(Double d : this.getCusto()) {
+			if(!custo.isBlank()) {
+				custo = custo + secundario;
+			}
+			custo = custo + d;
+		}
+		
+		codigo = super.getNome()+primario+this.getDescricao()+primario+this.getSistema()+primario+custo;
+		return codigo;
 	
 	}
 	@Override
 	public void DeCodigoParaDados(String Codigo) {
-		// TODO Auto-generated method stub
-		
+		int contador = 0;
+		for(String s : Codigo.split(primario)) {
+			switch(contador) {
+			case 0:
+				super.setNome(s);
+				break;
+			case 1:
+				this.setDescricao(s);
+				break;
+			case 2:
+				this.setSistema(s);
+				break;
+			case 3:
+				for(String ss : s.split(secundario)) {
+					this.InserirCusto(Double.parseDouble(ss));
+				}
+				break;
+			}
+			contador++;
+		}
 	}
 	
 	

@@ -314,13 +314,11 @@ public class Raca extends Formato {
 				break;
 			case 6:
 				for(String ss : s.split(secundario)) {
-					boolean primeiro = true;
 					String segmento = "";
 					for(String sss : ss.split(terciario)) {
-						if(primeiro) {
+						if(segmento.isBlank()) {
 							this.CriarSegmentoDePeculiaridade(sss);
 							segmento = sss;
-							primeiro = false;
 						}
 						else {
 							this.InserirPeculiaridadeNoSegmeno(segmento, sss);
