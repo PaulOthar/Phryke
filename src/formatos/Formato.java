@@ -11,4 +11,6 @@ public abstract class Formato {
 	public void setNome(String nome) {
 		Nome = nome;
 	}
+	
+	public abstract String DeDadosParaCodigo();
 }

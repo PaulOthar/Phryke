@@ -28,12 +28,16 @@ public class Raca extends Formato {
 	private ArrayList<ArrayList<String>> peculiaridades;
 	
 	public Raca() {
+		this.setCusto(new ArrayList<Double>());
+		this.setPeculiaridades(new ArrayList<ArrayList<String>>());
 		this.setDescricao(new String());
 		this.setSuperraca(new String());
 		this.setSistema(new String());
 		this.setCaracteristicasbonus(new ArrayList<Caracteristica>());
 	}
 	public Raca(String nome) {
+		this.setCusto(new ArrayList<Double>());
+		this.setPeculiaridades(new ArrayList<ArrayList<String>>());
 		this.setDescricao(new String());
 		this.setSuperraca(new String());
 		this.setSistema(new String());
@@ -41,6 +45,8 @@ public class Raca extends Formato {
 		super.setNome(nome);
 	}
 	public Raca(String nome,String descricao,String superraca,String sistema) {
+		this.setCusto(new ArrayList<Double>());
+		this.setPeculiaridades(new ArrayList<ArrayList<String>>());
 		super.setNome(nome);
 		this.setDescricao(descricao);
 		this.setSuperraca(superraca);
@@ -214,4 +220,58 @@ public class Raca extends Formato {
 	public void setPeculiaridades(ArrayList<ArrayList<String>> peculiaridades) {
 		this.peculiaridades = peculiaridades;
 	}
+
+	public String DeDadosParaCodigo() {
+		String primario = ";",secundario = "#",terciario = "¬";
+		String Codigo = "",Custo = "",Caracteristica = "",peculiaridades = "";
+		
+		for(Double c : this.getCusto()) {
+			if(!Custo.isBlank()) {
+				Custo = Custo + secundario;
+			}
+			Custo = Custo + c;
+		}
+		
+		for(Caracteristica c : this.getCaracteristicasbonus()) {
+			if(!Caracteristica.isBlank()) {
+				Caracteristica = Caracteristica + secundario;
+			}
+			Caracteristica = Caracteristica + c.getNome() + terciario + c.getDescricao()  + terciario + c.getRegra()  + terciario + c.getValor()  + terciario + c.getValormaximo()  + terciario + c.getValorminimo();
+		}
+		
+		for(ArrayList<String> arls : this.getPeculiaridades()) {
+			if(!peculiaridades.isBlank()) {
+				peculiaridades = peculiaridades + secundario;
+			}
+			String schindler = "";
+			for(String s : arls) {
+				if(!schindler.isBlank()) {
+					schindler = schindler + terciario;
+				}
+				schindler = schindler + s;
+			}
+			peculiaridades = peculiaridades + schindler;
+		}
+		
+		Codigo = super.getNome()+primario+this.getDescricao()+primario+this.getSuperraca()+primario+this.getSistema()+primario+Custo+primario+Caracteristica+primario+peculiaridades;
+		return Codigo;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

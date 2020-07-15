@@ -90,6 +90,11 @@ public class Caracteristica extends Formato {
 	public void setValormaximo(double valormaximo) {
 		this.valormaximo = valormaximo;
 	}
+	@Override
+	public String DeDadosParaCodigo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

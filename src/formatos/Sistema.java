@@ -28,4 +28,9 @@ public class Sistema extends Formato {
 	public void setCampos(ArrayList<Object> campos) {
 		this.campos = campos;
 	}
+	@Override
+	public String DeDadosParaCodigo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
