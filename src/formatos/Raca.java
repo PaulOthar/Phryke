@@ -222,7 +222,6 @@ public class Raca extends Formato {
 	}
 
 	public String DeDadosParaCodigo() {
-		String primario = ";",secundario = "#",terciario = "¬";
 		String Codigo = "",Custo = "",Caracteristica = "",peculiaridades = "";
 		
 		for(Double c : this.getCusto()) {
@@ -258,7 +257,6 @@ public class Raca extends Formato {
 	}
 	@Override
 	public void DeCodigoParaDados(String Codigo) {
-		String primario = ";",secundario = "#",terciario = "¬";
 		
 		int contador = 0;
 		

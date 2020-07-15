@@ -103,7 +103,6 @@ public class Caracteristica extends Formato {
 	
 	@Override
 	public String DeDadosParaCodigo() {
-		String primario = ";";
 		String codigo;
 		codigo = super.getNome()+primario+this.getDescricao()+primario+this.getRegra()+primario+this.getSistema()+primario+this.getValor()+primario+this.getValormaximo()+primario+this.getValorminimo();
 		return codigo;
@@ -111,7 +110,6 @@ public class Caracteristica extends Formato {
 	
 	@Override
 	public void DeCodigoParaDados(String Codigo) {
-		String primario = ";";
 		int contador = 0;
 		for(String s : Codigo.split(primario)) {
 			switch(contador) {

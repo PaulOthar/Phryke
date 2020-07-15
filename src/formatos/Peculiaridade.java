@@ -52,10 +52,13 @@ public class Peculiaridade extends Formato {
 	public void setCusto(ArrayList<Double> custo) {
 		this.custo = custo;
 	}
+	
 	@Override
 	public String DeDadosParaCodigo() {
-		// TODO Auto-generated method stub
+		String codigo = "";
+		
 		return null;
+	
 	}
 	@Override
 	public void DeCodigoParaDados(String Codigo) {
