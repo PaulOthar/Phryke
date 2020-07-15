@@ -8,8 +8,15 @@ public class Sistema extends Formato {
 	//Alguns sistemas Variam com campos do sistema, como D&D,que tem dextreza, no 3d&t tem habilidade....
 	//Caracteristicas: Forca, habilidade...
 	//Segmentos: Vantagens..desvantagens...magias...pericias.......
-	private ArrayList<String> caracteristicas,segmentos;
-	private ArrayList<String> regras;
+	private ArrayList<String> caracteristicas,segmentos,regras;
+	
+	public Sistema() {
+		super.setNome(new String());
+		this.setVersao(new String());
+		this.setCaracteristicas(new ArrayList<String>());
+		this.setSegmentos(new ArrayList<String>());
+		this.setRegras(new ArrayList<String>());
+	}
 	
 	public void AdicionarCaracteristicaPorCaracteristica(Caracteristica c) {
 		this.getCaracteristicas().add(c.getNome());
