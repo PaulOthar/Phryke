@@ -286,7 +286,7 @@ public class Frame {
 		
 		opp.get(6).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Criar Raca",6,new JPanel());
+				UsarAba("Criar Raca",6,new RacaCriar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(6)) {
@@ -322,7 +322,7 @@ public class Frame {
 			}});
 		opp.get(8).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Consultar Raca",8,new JPanel());
+				UsarAba("Consultar Raca",8,new RacaConsultar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(8)) {
