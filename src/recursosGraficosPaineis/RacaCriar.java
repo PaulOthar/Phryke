@@ -23,15 +23,21 @@ public class RacaCriar extends Pagina {
 	private JSpinner modificadorcaracteristica = new JSpinner();
 	
 	private JButton criarraca = new JButton("Criar");
-	private JButton inserirpeculiaridade = new JButton("Inserir");
-	private JButton removerpeculiaridade = new JButton("Remover");
-	private JButton inserirmodificador = new JButton("Inserir");
-	private JButton removermodificador = new JButton("Remover");
+	private JButton inserirpeculiaridade = new JButton("Inserir Peculiaridade");
+	private JButton removerpeculiaridade = new JButton("Remover Peculiaridade");
+	private JButton inserirmodificador = new JButton("Inserir Modificador");
+	private JButton removermodificador = new JButton("Remover Modificador");
 	
 	private JTextField nomeraca = new JTextField();
 	private JTextArea descricaoraca = new JTextArea();
 	
 	private JPanel painelauxiliar = new JPanel();
+	
+	private JSpinner custo = new JSpinner();
+	private JComboBox<String> custos = new JComboBox<String>(new String[] {"Sem Custo"});
+	private JButton inserircusto = new JButton("Inserir Custo");
+	private JButton removercusto = new JButton("Remover Custo");
+	
 	@Override
 	public JPanel GerarPainel() {
 		super.Inicializar();
@@ -57,14 +63,19 @@ public class RacaCriar extends Pagina {
 		
 		ManipuladorPosicionativo.configbasica();
 		ManipuladorPosicionativo.weightxy(1, 2);
-		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBordaEScroll(descricaoraca, 0, 2, 1, 1, "Descricao"));
-		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(painelauxiliar, 1, 2, 1, 1));
+		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBordaEScroll(descricaoraca, 0, 2, 1, 2, "Descricao"));
+		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(painelauxiliar, 2, 2, 1, 3));
 		
+		ManipuladorPosicionativo.weightxy(4, 0);
+		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(criarraca, 0, 1, 1, 2));
+		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(nomeraca, 0, 0, 1, 2, "Nome"));
 		ManipuladorPosicionativo.weightxy(1, 0);
-		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(criarraca, 0, 1, 1, 1));
-		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(nomeraca, 0, 0, 1, 1, "Nome"));
-		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(superraca, 1, 1, 1, 1, "Super Raca"));
-		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(sistemas, 1, 0, 1, 1, "Sistema"));
+		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(sistemas, 2, 0, 1, 1, "Sistema"));
+		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(custo, 4, 1, 1, 1,"Custo"));
+		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(custos, 4, 0, 1, 1,"Custos"));
+		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(superraca, 3, 0, 1, 1, "Super Raca"));
+		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(inserircusto, 2, 1, 1, 1));
+		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(removercusto, 3, 1, 1, 1));
 		
 		
 		return super.getPainel();
