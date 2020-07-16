@@ -304,7 +304,7 @@ public class Frame {
 			}});
 		opp.get(7).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Criar Super Raca",7,new JPanel());
+				UsarAba("Criar Super Raca",7,new SuperRacaCriar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(7)) {
@@ -340,7 +340,7 @@ public class Frame {
 			}});
 		opp.get(9).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Consultar Super Raca",9,new JPanel());
+				UsarAba("Consultar Super Raca",9,new SuperRacaConsultar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(9)) {
