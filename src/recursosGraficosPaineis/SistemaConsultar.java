@@ -19,7 +19,7 @@ public class SistemaConsultar extends Pagina {
 		super.Inicializar();
 		
 		descricao.setEditable(false);
-		descricao.setLineWrap(true);
+		//descricao.setLineWrap(true);
 		
 		ManipuladorPosicionativo.configbasica();
 		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(visualizador, 0, 1, 1, 1, "Estrutura"));
