@@ -10,7 +10,7 @@ import recursosGraficos.ManipuladorPosicionativo;
 public class CaracteristicaConsultar extends Pagina {
 	private JComboBox<String> sistemas = new JComboBox<String>(new String[] {"Todos"});
 	private JTextArea descricao = new JTextArea();
-	private JList caracteristicas = new JList<String>();
+	private JList<String> caracteristicas = new JList<String>();
 	
 	@Override
 	public JPanel GerarPainel() {

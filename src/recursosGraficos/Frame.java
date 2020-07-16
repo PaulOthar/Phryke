@@ -212,7 +212,7 @@ public class Frame {
 		
 		opp.get(2).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Criar Peculiaridade",2,new JPanel());
+				UsarAba("Criar Peculiaridade",2,new PeculiaridadeCriar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(2)) {
@@ -230,7 +230,7 @@ public class Frame {
 			}});
 		opp.get(3).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Consultar Peculiaridade",3,new JPanel());
+				UsarAba("Consultar Peculiaridade",3,new PeculiaridadeConsultar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(3)) {
