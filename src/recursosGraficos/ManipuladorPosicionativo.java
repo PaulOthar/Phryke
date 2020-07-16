@@ -2,6 +2,7 @@ package recursosGraficos;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JComponent;
 
@@ -27,6 +28,11 @@ public class ManipuladorPosicionativo {
 		return Adicionar(ManipuladorDeComponente.BordaComScroll(componente,titulo),x,y,altura,largura);
 	}
 	
+	public static void Inicializar() {
+		Resetar();
+		weightxy(1,1);
+		getLimitacao().insets = new Insets(1,1,1,1);
+	}
 	public static void configbasica() {
 		ManipuladorPosicionativo.weightxy(1,1);
 		ManipuladorPosicionativo.fill(GridBagConstraints.BOTH);

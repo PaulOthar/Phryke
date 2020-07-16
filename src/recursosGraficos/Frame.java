@@ -21,6 +21,8 @@ import javax.swing.event.ChangeListener;
 
 import ferramentas.Mensageiro;
 import formatos.Regra;
+import recursosGraficosPaineis.SistemaConsultar;
+import recursosGraficosPaineis.SistemaCriar;
 import recursosLogicos.MeuNomeEhDado;
 
 public class Frame {
@@ -174,7 +176,7 @@ public class Frame {
 		
 		opp.get(0).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Criar Sistema",0,new JPanel());
+				UsarAba("Criar Sistema",0,new SistemaCriar().GerarPainel());
 				
 				//Se For Verdade
 				if(status.get(0)) {
@@ -192,7 +194,7 @@ public class Frame {
 			}});
 		opp.get(1).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Consultar Sistema",1,new JPanel());
+				UsarAba("Consultar Sistema",1,new SistemaConsultar().GerarPainel());
 				
 				//Se For Verdade
 				if(status.get(1)) {
