@@ -21,6 +21,7 @@ import javax.swing.event.ChangeListener;
 
 import ferramentas.Mensageiro;
 import formatos.Regra;
+import recursosGraficosPaineis.*;
 import recursosLogicos.MeuNomeEhDado;
 
 public class Frame {
@@ -174,7 +175,7 @@ public class Frame {
 		
 		opp.get(0).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Criar Sistema",0,new JPanel());
+				UsarAba("Criar Sistema",0,new SistemaCriar().GerarPainel());
 				
 				//Se For Verdade
 				if(status.get(0)) {
@@ -192,7 +193,7 @@ public class Frame {
 			}});
 		opp.get(1).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Consultar Sistema",1,new JPanel());
+				UsarAba("Consultar Sistema",1,new SistemaConsultar().GerarPainel());
 				
 				//Se For Verdade
 				if(status.get(1)) {
@@ -211,7 +212,7 @@ public class Frame {
 		
 		opp.get(2).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Criar Peculiaridade",2,new JPanel());
+				UsarAba("Criar Peculiaridade",2,new PeculiaridadeCriar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(2)) {
@@ -229,7 +230,7 @@ public class Frame {
 			}});
 		opp.get(3).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Consultar Peculiaridade",3,new JPanel());
+				UsarAba("Consultar Peculiaridade",3,new PeculiaridadeConsultar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(3)) {
@@ -248,7 +249,7 @@ public class Frame {
 		
 		opp.get(4).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Criar Caracteristica",4,new JPanel());
+				UsarAba("Criar Caracteristica",4,new CaracteristicaCriar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(4)) {
@@ -266,7 +267,7 @@ public class Frame {
 			}});
 		opp.get(5).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Consultar Caracteristica",5,new JPanel());
+				UsarAba("Consultar Caracteristica",5,new CaracteristicaConsultar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(5)) {
@@ -285,7 +286,7 @@ public class Frame {
 		
 		opp.get(6).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Criar Raca",6,new JPanel());
+				UsarAba("Criar Raca",6,new RacaCriar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(6)) {
@@ -303,7 +304,7 @@ public class Frame {
 			}});
 		opp.get(7).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Criar Super Raca",7,new JPanel());
+				UsarAba("Criar Super Raca",7,new SuperRacaCriar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(7)) {
@@ -321,7 +322,7 @@ public class Frame {
 			}});
 		opp.get(8).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Consultar Raca",8,new JPanel());
+				UsarAba("Consultar Raca",8,new RacaConsultar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(8)) {
@@ -339,7 +340,7 @@ public class Frame {
 			}});
 		opp.get(9).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Consultar Super Raca",9,new JPanel());
+				UsarAba("Consultar Super Raca",9,new SuperRacaConsultar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(9)) {
