@@ -21,8 +21,7 @@ import javax.swing.event.ChangeListener;
 
 import ferramentas.Mensageiro;
 import formatos.Regra;
-import recursosGraficosPaineis.SistemaConsultar;
-import recursosGraficosPaineis.SistemaCriar;
+import recursosGraficosPaineis.*;
 import recursosLogicos.MeuNomeEhDado;
 
 public class Frame {
@@ -250,7 +249,7 @@ public class Frame {
 		
 		opp.get(4).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Criar Caracteristica",4,new JPanel());
+				UsarAba("Criar Caracteristica",4,new CaracteristicaCriar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(4)) {
@@ -268,7 +267,7 @@ public class Frame {
 			}});
 		opp.get(5).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				UsarAba("Consultar Caracteristica",5,new JPanel());
+				UsarAba("Consultar Caracteristica",5,new CaracteristicaConsultar().GerarPainel());
 
 				//Se For Verdade
 				if(status.get(5)) {
