@@ -25,7 +25,6 @@ import recursosLogicos.MeuNomeEhDado;
 public class Frame {
 	private static JFrame tela = new JFrame("RPG");
 	private static JTabbedPane abas = new JTabbedPane();
-	private static ArrayList<Boolean> status = new ArrayList<Boolean>();
 	private static ArrayList<Boolean> izdadus = new ArrayList<Boolean>();
 	private static int Dado = 6;
 	
@@ -39,7 +38,6 @@ public class Frame {
 		tela.setVisible(true);
 	}
 	public static void Rodar() {
-		InicializarStatus();
 		BasicoDaTela();
 	}
 	
@@ -302,39 +300,17 @@ public class Frame {
 		//Meu Proprio Easter Egg, Com jogos e Pr*********!
 		JMenu menu = new JMenu("Ajuda");
 		JMenuItem meme = new JMenuItem("Te Vira");
-		JMenuItem meme2 = new JMenuItem("Thanos de Saia");
 		meme.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Mensageiro.GerarMensagemSimples("Nao e problema meu, te vira kkkk", "Te Vira");
 			}});
 		menu.add(meme);
-		menu.add(meme2);
 		return menu;
 	}
 	
-	public static void InicializarStatus() {
-		for(int i = 0;i<20;i++) {
-			status.add(false);
-		}
-	}
-	public static void PadronizarStatus(boolean b) {
-		for(int i = 0;i<20;i++) {
-			status.set(i,b);
-		}
-	}
 	public static void PadronizarIzdadus(boolean b) {
 		for(int i = 0;i<izdadus.size();i++) {
 			izdadus.set(i, b);
-		}
-	}
-	public static void UsarAba(String titulo,int index,JPanel painel) {
-		if(status.get(index)) {
-			abas.removeTabAt(abas.indexOfTab(titulo));
-			status.set(index, false);
-		}
-		else {
-			abas.addTab(titulo,painel);
-			status.set(index, true);
 		}
 	}
 	public static void UsarAbas(String titulo,int index,JPanel painel) {
@@ -348,15 +324,15 @@ public class Frame {
 		}
 	}
 	public static void UsarAbaComScroll(String titulo,int index,JPanel painel) {
-		if(status.get(index)) {
+		if(izdadus.get(index)) {
 			abas.removeTabAt(abas.indexOfTab(titulo));
-			status.set(index, false);
+			izdadus.set(index, false);
 		}
 		else {
 			JScrollPane Scrollado = ManipuladorDeComponente.Scroll(painel);
 			Scrollado.getVerticalScrollBar().setUnitIncrement(15);
 			abas.addTab(titulo,Scrollado);
-			status.set(index, true);
+			izdadus.set(index, true);
 		}
 	}
 	public static void DefinirOrientacao(String orientacao) {
