@@ -11,8 +11,12 @@ import recursosGraficos.ManipuladorPosicionativo;
 public class SistemaCriar extends Pagina{
 	JTextField nome = new JTextField(),nomesegmentos = new JTextField();
 	JList<String> segmentos = new JList<String>(),caracteristicas = new JList<String>();
-	JButton botaosegmento = new JButton("Adicionar"),botaosistema = new JButton("Criar"),botaocaracteristica = new JButton("Adicionar");
-	JComboBox<String> opcaosegmento = new JComboBox<String>(new String[] {"Adicionar","Remover"}),opcaocaracteristica = new JComboBox<String>(new String[] {"Adicionar","Remover"}),caracteristicasexi = new JComboBox<String>();
+	JButton	botaosistema = new JButton("Criar");
+	JButton botaocaracteristicaa = new JButton("Adicionar Caracteristica");
+	JButton botaocaracteristicar = new JButton("Remover Caracteristica");
+	JButton botaosegmentoa = new JButton("Adicionar Segmento");
+	JButton botaosegmentor = new JButton("Remover Segmento");
+	JComboBox<String> caracteristicasexi = new JComboBox<String>();
 	
 
 	@Override
@@ -26,12 +30,13 @@ public class SistemaCriar extends Pagina{
 		ManipuladorPosicionativo.weightxy(0, 0);
 		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(nome, 0, 0, 1, 1, "Nome Do Sistema"));
 		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(botaosistema, 1, 0, 1, 1));
+		
 		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(nomesegmentos, 0, 1, 1, 1, "Nome Do Segmento"));
-		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(opcaosegmento, 0, 2, 1, 1, "Operacoes De Segmento"));
-		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(botaosegmento, 0, 3, 1, 1));
+		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(botaosegmentoa, 0, 2, 1, 1));
+		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(botaosegmentor, 0, 3, 1, 1));
 		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(caracteristicasexi, 1, 1, 1, 1, "Caracteristicas Existentes"));
-		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(opcaocaracteristica, 1, 2, 1, 1, "Operacoes De Caracteristica"));
-		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(botaocaracteristica, 1, 3, 1, 1));
+		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(botaocaracteristicaa, 1, 2, 1, 1));
+		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(botaocaracteristicar, 1, 3, 1, 1));
 		
 		return super.getPainel();
 	}
