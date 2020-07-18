@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class ManipuladorDeComponente {
@@ -14,6 +15,10 @@ public class ManipuladorDeComponente {
 	public static JComponent Scroll(JComponent componente) {
 		return new JScrollPane(componente,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 	}
+	public static JScrollPane Scroll(JPanel painel) {
+		return new JScrollPane(painel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	}
+	
 	
 	public static JComponent BordaComScroll(JComponent componente,String nome) {
 		return Borda(Scroll(componente),nome);
