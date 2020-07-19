@@ -22,6 +22,9 @@ public class DadosDeBanco {
 		}
 		ManipuladorDeArquivo.sobreescreverArquivoLista(ManipuladorDeArquivo.selecionarArquivoPorNome(pasta, tipo.getClass().getSimpleName()+".txt"), Codigos);
 	}
+	public static void SalvarUnico(Formato f) {
+		ManipuladorDeArquivo.escreverNovaLinha(ManipuladorDeArquivo.selecionarArquivoPorNome(pasta, f.getClass().getSimpleName()+".txt"), f.DeDadosParaCodigo());
+	}
 	public static ArrayList<Formato> CarregarProBanco(Object o,Object tipo) {
 		ArrayList<Formato> Formato = (ArrayList<formatos.Formato>) o;
 		ArrayList<String> Codigos = new ArrayList<String>();
