@@ -279,5 +279,10 @@ public class SuperRaca extends Formato {
 		}
 		
 	}
+	@Override
+	public Formato GerarProprioTipo() {
+		// TODO Auto-generated method stub
+		return new SuperRaca();
+	}
 
 }

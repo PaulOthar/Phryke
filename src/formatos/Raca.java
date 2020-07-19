@@ -373,5 +373,10 @@ public class Raca extends Formato {
 			contador++;
 		}
 	}
+	@Override
+	public Formato GerarProprioTipo() {
+		// TODO Auto-generated method stub
+		return new Raca();
+	}
 	
 }

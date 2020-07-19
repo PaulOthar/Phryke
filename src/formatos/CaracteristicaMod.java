@@ -33,4 +33,9 @@ public class CaracteristicaMod extends Formato {
 
 	}
 
+	@Override
+	public Formato GerarProprioTipo() {
+		return new CaracteristicaMod();
+	}
+
 }

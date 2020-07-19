@@ -47,5 +47,11 @@ public class Regra extends Formato {
 			Contador++;
 		}
 	}
+
+	@Override
+	public Formato GerarProprioTipo() {
+		// TODO Auto-generated method stub
+		return new Regra();
+	}
 	
 }

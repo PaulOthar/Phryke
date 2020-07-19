@@ -73,7 +73,6 @@ public class Peculiaridade extends Formato {
 		}
 	}
 	
-	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -174,6 +173,11 @@ public class Peculiaridade extends Formato {
 			}
 			contador++;
 		}
+	}
+	@Override
+	public Formato GerarProprioTipo() {
+		// TODO Auto-generated method stub
+		return new Peculiaridade();
 	}
 	
 	

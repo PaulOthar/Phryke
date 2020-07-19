@@ -124,4 +124,10 @@ public class Sistema extends Formato {
 			contador++;
 		}
 	}
+
+	@Override
+	public Formato GerarProprioTipo() {
+		// TODO Auto-generated method stub
+		return new Sistema();
+	}
 }
