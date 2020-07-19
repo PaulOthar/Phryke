@@ -61,6 +61,9 @@ public class Raca extends Formato {
 					this.CriarCaracteristicaBonus(c.getNome());
 					this.InserirValorNaCaracteristica(c.getNome(), c.getValor());
 				}
+				for(String ss : s.getSegmentos()) {
+					this.CriarSegmentoDePeculiaridade(ss);
+				}
 			}
 		}
 	}
@@ -73,6 +76,19 @@ public class Raca extends Formato {
 				}
 			}
 		}
+	}
+	public void ReceberPeculiaridades(Peculiaridade p) {
+		for(ArrayList<String> arls : this.getPeculiaridades()) {
+			if(arls.get(0).contentEquals(p.getNome())) {
+				this.InserirPeculiaridadeNoSegmeno(arls.get(0), p.getNome());
+				this.ReceberModificadores(p.getCaracteristicasbonus());
+			}
+		}
+	}
+	public void ReceberSuperRaca(SuperRaca r) {
+		this.setSuperraca(r.getNome());
+		this.SomarPeculiaridades(r.getPeculiaridades());
+		this.ReceberModificadores(r.getCaracteristicasbonus());
 	}
 	
 	public void CriarSegmentoDePeculiaridade(String nomesegmento) {
@@ -160,6 +176,17 @@ public class Raca extends Formato {
 		for(int i = 0;i<this.getPeculiaridades().size();i++) {
 			if(this.getPeculiaridades().get(i).get(0).equals(nomesegmento)) {
 				this.getPeculiaridades().get(i).remove(nomepeculiaridade);
+			}
+		}
+	}
+	public void SomarPeculiaridades(ArrayList<ArrayList<String>> peculiaridades) {
+		for(ArrayList<String> segmento : peculiaridades) {
+			for(ArrayList<String> segmentointerno : this.getPeculiaridades()) {
+				if(segmento.get(0) == segmentointerno.get(0)) {
+					for(int i = 1;i<segmento.size();i++) {
+						this.InserirPeculiaridadeNoSegmeno(segmento.get(0), segmento.get(i));
+					}
+				}
 			}
 		}
 	}

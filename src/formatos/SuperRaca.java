@@ -23,6 +23,9 @@ public class SuperRaca extends Formato {
 					this.CriarCaracteristicaBonus(c.getNome());
 					this.InserirValorNaCaracteristica(c.getNome(), c.getValor());
 				}
+				for(String ss : s.getSegmentos()) {
+					this.CriarSegmentoDePeculiaridade(ss);
+				}
 			}
 		}
 	}
@@ -33,6 +36,14 @@ public class SuperRaca extends Formato {
 				if(m.getNome() == mm.getNome()) {
 					SomarModificadorCaracteristica(mm.getNome(),m.getModificador());
 				}
+			}
+		}
+	}
+	public void ReceberPeculiaridades(Peculiaridade p) {
+		for(ArrayList<String> arls : this.getPeculiaridades()) {
+			if(arls.get(0).contentEquals(p.getNome())) {
+				this.InserirPeculiaridadeNoSegmeno(arls.get(0), p.getNome());
+				this.ReceberModificadores(p.getCaracteristicasbonus());
 			}
 		}
 	}
