@@ -18,6 +18,18 @@ public class Sistema extends Formato {
 		this.setRegras(new ArrayList<String>());
 	}
 	
+	public ArrayList<Caracteristica> PegarCaracteristicas(ArrayList<Caracteristica> ca) {
+		ArrayList<Caracteristica> cagerada = new ArrayList<Caracteristica>();
+		for(Caracteristica c : ca) {
+			for(String s : this.getCaracteristicas()) {
+				if(c.getNome() == s) {
+					cagerada.add(c);
+				}
+			}
+		}
+		return cagerada;
+	}
+	
 	public void AdicionarCaracteristicaPorCaracteristica(Caracteristica c) {
 		this.getCaracteristicas().add(c.getNome());
 	}

@@ -2,56 +2,18 @@ package formatos;
 
 import java.util.ArrayList;
 
-public class Raca extends Formato {
-	//Super raca se refere ao subtipo de raca, tipo, um zumbi e um esqueleto pertencem ao subtipo undead  
-	private String descricao,superraca,sistema;
-	//Algums racas podem variar em custo dentro dos mesmos parametros,oq significa q a pessoa deve optar pelo custo personalizado
-	private ArrayList<Double> custo;
-	//Racas Podem Dar Bonus em certas caracteristicas, e como nao sabemos quais caracteristicas estamos brincando, eu usei ArrayList
+public class SuperRaca extends Formato {
+	private String sistema,descricao;
+	
 	private ArrayList<CaracteristicaMod> caracteristicasbonus;
-	/*
-	Peculiaridades seriam como perks, a habilidade de voar, por exemplo, ou ter um braco mecanico...
-	Cada sistema pode variar com peculiaridades, pretendo englobar ate magia
-	Observa-se uma matriz... o primeiro item de uma coluna, sempre sera referencia ao tipo de peculiaridade
-	Vamos trabalhar apenas com referencia, nao vamos inserir o dado em si, pra nao ocupar muita memoria
-	
-	Tipo:
-	# / # / #
-	# / # / #
-	# / # / #
-	Matriz 3x3
-	
-	Vantagens / Voar / Membros elasticos
-	Desvantagens / Cego / Surdo
-	Aptidoes / Magia Branca / Clonagem
-	 */
 	private ArrayList<ArrayList<String>> peculiaridades;
 	
-	public Raca() {
-		this.setCusto(new ArrayList<Double>());
-		this.setPeculiaridades(new ArrayList<ArrayList<String>>());
-		this.setDescricao(new String());
-		this.setSuperraca(new String());
-		this.setSistema(new String());
-		this.setCaracteristicasbonus(new ArrayList<CaracteristicaMod>());
+	public SuperRaca() {
+		
 	}
-	public Raca(String nome) {
-		this.setCusto(new ArrayList<Double>());
-		this.setPeculiaridades(new ArrayList<ArrayList<String>>());
-		this.setDescricao(new String());
-		this.setSuperraca(new String());
-		this.setSistema(new String());
-		this.setCaracteristicasbonus(new ArrayList<CaracteristicaMod>());
-		super.setNome(nome);
-	}
-	public Raca(String nome,String descricao,String superraca,String sistema) {
-		this.setCusto(new ArrayList<Double>());
-		this.setPeculiaridades(new ArrayList<ArrayList<String>>());
+	public SuperRaca(String nome,String descricao) {
 		super.setNome(nome);
 		this.setDescricao(descricao);
-		this.setSuperraca(superraca);
-		this.setSistema(sistema);
-		this.setCaracteristicasbonus(new ArrayList<CaracteristicaMod>());
 	}
 	
 	public void ConfigurarViaSistema(ArrayList<Sistema> sys,ArrayList<Caracteristica> ca) {
@@ -177,7 +139,7 @@ public class Raca extends Formato {
 	public void EditarCaracteristica(String nomedacaracteristicainicial,String nomedacaracteristicaatual) {
 		for(int i = 0;i<this.getCaracteristicasbonus().size();i++) {
 			if(this.getCaracteristicasbonus().get(i).getNome().contentEquals(nomedacaracteristicainicial)) {
-				this.getCaracteristicasbonus().get(i).setNome(nomedacaracteristicaatual);
+				this.getCaracteristicasbonus().get(i).setNome(nomedacaracteristicaatual);;
 			}
 		}
 	}
@@ -196,32 +158,11 @@ public class Raca extends Formato {
 		}
 	}
 	
-	public void InserirCusto(double custo) {
-		this.getCusto().add(custo);
-	}
-	public void EditarCusto(double custoinicial,double custoatual) {
-		for(int i = 0;i<this.getCusto().size();i++) {
-			if(this.getCusto().get(i).equals(custoinicial)) {
-				this.getCusto().set(i, custoatual);
-				return;
-			}
-		}
-	}
-	public void RemoverCusto(double custo) {
-		this.getCusto().remove(custo);
-	}
-	
-	public String getDescricao() {
-		return descricao;
-	}
-	public String getSuperraca() {
-		return superraca;
-	}
 	public String getSistema() {
 		return sistema;
 	}
-	public ArrayList<Double> getCusto() {
-		return custo;
+	public String getDescricao() {
+		return descricao;
 	}
 	public ArrayList<CaracteristicaMod> getCaracteristicasbonus() {
 		return caracteristicasbonus;
@@ -229,18 +170,11 @@ public class Raca extends Formato {
 	public ArrayList<ArrayList<String>> getPeculiaridades() {
 		return peculiaridades;
 	}
-	
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-	public void setSuperraca(String superraca) {
-		this.superraca = superraca;
-	}
 	public void setSistema(String sistema) {
 		this.sistema = sistema;
 	}
-	public void setCusto(ArrayList<Double> custo) {
-		this.custo = custo;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	public void setCaracteristicasbonus(ArrayList<CaracteristicaMod> caracteristicasbonus) {
 		this.caracteristicasbonus = caracteristicasbonus;
@@ -248,23 +182,10 @@ public class Raca extends Formato {
 	public void setPeculiaridades(ArrayList<ArrayList<String>> peculiaridades) {
 		this.peculiaridades = peculiaridades;
 	}
-
+	
+	@Override
 	public String DeDadosParaCodigo() {
-		String Codigo = "",Custo = "",Caracteristica = "",peculiaridades = "";
-		
-		for(Double c : this.getCusto()) {
-			if(!Custo.isBlank()) {
-				Custo = Custo + secundario;
-			}
-			Custo = Custo + c;
-		}
-		
-		for(CaracteristicaMod c : this.getCaracteristicasbonus()) {
-			if(!Caracteristica.isBlank()) {
-				Caracteristica = Caracteristica + secundario;
-			}
-			Caracteristica = Caracteristica + c.getNome() + terciario + c.getModificador();
-		}
+		String codigo = "",Caracteristica = "",peculiaridades = "";
 		
 		for(ArrayList<String> arls : this.getPeculiaridades()) {
 			if(!peculiaridades.isBlank()) {
@@ -280,9 +201,17 @@ public class Raca extends Formato {
 			peculiaridades = peculiaridades + schindler;
 		}
 		
-		Codigo = super.getNome()+primario+this.getDescricao()+primario+this.getSuperraca()+primario+this.getSistema()+primario+Custo+primario+Caracteristica+primario+peculiaridades;
-		return Codigo;
+		for(CaracteristicaMod c : this.getCaracteristicasbonus()) {
+			if(!Caracteristica.isBlank()) {
+				Caracteristica = Caracteristica + secundario;
+			}
+			Caracteristica = Caracteristica + c.getNome() + terciario + c.getModificador();
+		}
+		
+		codigo = super.getNome() + primario + this.getSistema() + primario + this.getDescricao() + primario + Caracteristica + primario + peculiaridades;
+		return codigo;
 	}
+
 	@Override
 	public void DeCodigoParaDados(String Codigo) {
 		
@@ -294,20 +223,12 @@ public class Raca extends Formato {
 				super.setNome(s);
 				break;
 			case 1:
-				this.setDescricao(s);
-				break;
-			case 2:
-				this.setSuperraca(s);
-				break;
-			case 3:
 				this.setSistema(s);
 				break;
-			case 4:
-				for(String ss : s.split(secundario)) {
-					this.InserirCusto(Double.parseDouble(ss));
-				}
+			case 2:
+				this.setDescricao(s);
 				break;
-			case 5:
+			case 3:
 				for(String ss : s.split(secundario)) {
 					
 					CaracteristicaMod c = new CaracteristicaMod();
@@ -328,7 +249,7 @@ public class Raca extends Formato {
 					this.getCaracteristicasbonus().add(c);
 				}
 				break;
-			case 6:
+			case 4:
 				for(String ss : s.split(secundario)) {
 					String segmento = "";
 					for(String sss : ss.split(terciario)) {
@@ -345,6 +266,7 @@ public class Raca extends Formato {
 			}
 			contador++;
 		}
+		
 	}
-	
+
 }
