@@ -14,15 +14,15 @@ public class DadosDeBanco {
 	public static ArrayList<SuperRaca> SuperRacas = new ArrayList<SuperRaca>();
 	public static ArrayList<Regra> Regras = new ArrayList<Regra>();
 	
-	public static void Salvar(Object o) {
+	public static void Salvar(Object o,Object tipo) {
 		ArrayList<Formato> Formatos = (ArrayList<Formato>) o;
 		ArrayList<String> Codigos = new ArrayList<String>();
 		for(Formato ff : Formatos) {
 			Codigos.add(ff.DeDadosParaCodigo());
 		}
-		ManipuladorDeArquivo.sobreescreverArquivoLista(ManipuladorDeArquivo.selecionarArquivoPorNome(pasta, Formatos.get(0).getClass().getSimpleName()+".txt"), Codigos);
+		ManipuladorDeArquivo.sobreescreverArquivoLista(ManipuladorDeArquivo.selecionarArquivoPorNome(pasta, tipo.getClass().getSimpleName()+".txt"), Codigos);
 	}
-	public static ArrayList<Formato> Carregar(Object o,Object tipo) {
+	public static ArrayList<Formato> CarregarProBanco(Object o,Object tipo) {
 		ArrayList<Formato> Formato = (ArrayList<formatos.Formato>) o;
 		ArrayList<String> Codigos = new ArrayList<String>();
 		
@@ -41,5 +41,17 @@ public class DadosDeBanco {
 		
 		o = Formato;
 		return Formato;
+	}
+	public static ArrayList<Formato> Carregar(Formato tipo){
+		ArrayList<Formato> formatos = new ArrayList<Formato>();
+		ArrayList<String> Codigos = new ArrayList<String>();
+		for(String s : ManipuladorDeArquivo.lerArquivoLinhas(ManipuladorDeArquivo.selecionarArquivoPorNome(pasta, tipo.getClass().getSimpleName()+".txt"))) {
+			Codigos.add(s);
+		}
+		for(int i = 0;i<Codigos.size();i++) {
+			formatos.add(tipo.GerarProprioTipo());
+			formatos.get(i).DeCodigoParaDados(Codigos.get(i));
+		}
+		return formatos;
 	}
 }
