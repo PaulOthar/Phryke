@@ -64,7 +64,4 @@ public class DadosDeBanco {
 		}
 		return nomes;
 	}
-	public static void Substituir (Formato tipovelho,Formato tiponovo) {
-		ManipuladorDeArquivo.SubstituirArquivoLinha(ManipuladorDeArquivo.selecionarArquivoPorNome(pasta, tipovelho.getClass().getSimpleName()+".txt"), tipovelho.DeDadosParaCodigo(), tiponovo.DeDadosParaCodigo());
-	}
 }

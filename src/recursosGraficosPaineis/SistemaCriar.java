@@ -24,7 +24,7 @@ public class SistemaCriar extends Pagina{
 	JButton botaocaracteristicar = new JButton("Remover Caracteristica");
 	JButton botaosegmentoa = new JButton("Adicionar Segmento");
 	JButton botaosegmentor = new JButton("Remover Segmento");
-	JComboBox<String> caracteristicasexi = new JComboBox<String>(new String[] {"Selecione","Atualizar"});
+	JComboBox<String> caracteristicasexi = new JComboBox<String>(new String[] {"Selecione","Potato"});
 	
 	Sistema sys = new Sistema();
 	
@@ -181,12 +181,16 @@ public class SistemaCriar extends Pagina{
 		System.out.println("Lista De Nomes De Caracteristicas Atualizada");
 	}
 	public void LimparTudo() {
-		this.nome.setText("");
-		this.nomesegmentos.setText("");
-		this.segmentos.setListData(new String[] {});
-		this.caracteristicas.setListData(new String[] {});
-		this.caracteristicasexi.removeAllItems();
+		this.nome = new JTextField();
+		this.nomesegmentos = new JTextField();
+		this.segmentos = new JList<String>();
+		this.caracteristicas = new JList<String>();
+		this.botaosistema = new JButton("Criar");
+		this.botaocaracteristicaa = new JButton("Adicionar Caracteristica");
+		this.botaocaracteristicar = new JButton("Remover Caracteristica");
+		this.botaosegmentoa = new JButton("Adicionar Segmento");
+		this.botaosegmentor = new JButton("Remover Segmento");
+		this.caracteristicasexi = new JComboBox<String>(new String[] {"Selecione","Potato"});
 		this.sys = new Sistema();
-		AtualizarCaracteristicasCombo();
 	}
 }

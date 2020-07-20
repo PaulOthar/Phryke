@@ -250,14 +250,4 @@ public class ManipuladorDeArquivo {
 		String saida = Desparagrafadorsimples(s);
 		return saida.replaceAll(";", ",").replaceAll("£", "").replaceAll("#", "*");
 	}
-	
-	public static void SubstituirArquivoLinha(File arquivo,String textoinicial,String textoatual) {
-		ArrayList<String> lista = lerArquivoLinhas(arquivo);
-		for(int i = 0;i<lista.size();i++) {
-			if(lista.get(i).contentEquals(textoinicial)) {
-				lista.set(i, textoatual);
-			}
-		}
-		sobreescreverArquivoLista(arquivo,lista);
-	}
 }
