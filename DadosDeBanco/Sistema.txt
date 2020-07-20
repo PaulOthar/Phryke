@@ -1,4 +1,4 @@
-3 Alpha;3D&T;Forca#Habilidade#Armadura#Resistencia#Poder De Fogo#Pontos De Vida#Pontos De Mana;Vantagens#Desvantagens#Magias#Itens#Tipos De Dano;   
+3 Alpha;3D&T;Forca#Habilidade#Armadura#Resistencia#Poder De Fogo#Pontos De Vida#Pontos De Mana#Força;Vantagens#Desvantagens#Magias#Itens#Tipos De Dano;   
 ;3D&T;Potato#Potato#Potato#Potato#Potato#Potato#Potato#Potato;Vantagens#Desvantagens#Pericias#Magias#Tipos De Dano#Itens;  
 2.0;3D&T;;; 
 3.0;3D&T;;;
