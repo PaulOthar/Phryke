@@ -1,12 +1,20 @@
 package recursosGraficosPaineis;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import formatos.Caracteristica;
+import formatos.Formato;
+import formatos.Sistema;
 import recursosGraficos.ManipuladorPosicionativo;
+import recursosLogicos.DadosDeBanco;
 
 public class SistemaCriar extends Pagina{
 	JTextField nome = new JTextField(),nomesegmentos = new JTextField();
@@ -16,9 +24,10 @@ public class SistemaCriar extends Pagina{
 	JButton botaocaracteristicar = new JButton("Remover Caracteristica");
 	JButton botaosegmentoa = new JButton("Adicionar Segmento");
 	JButton botaosegmentor = new JButton("Remover Segmento");
-	JComboBox<String> caracteristicasexi = new JComboBox<String>();
+	JComboBox<String> caracteristicasexi = new JComboBox<String>(new String[] {"Selecione","Potato"});
 	
-
+	Sistema sys = new Sistema();
+	
 	@Override
 	public JPanel GerarPainel() {
 		super.Inicializar();
@@ -38,7 +47,150 @@ public class SistemaCriar extends Pagina{
 		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(botaocaracteristicaa, 1, 2, 1, 1));
 		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(botaocaracteristicar, 1, 3, 1, 1));
 		
+		Funcionalidade();
+		AtualizarCaracteristicasCombo();
 		return super.getPainel();
 	}
+	
+	public void Funcionalidade() {
+		botaosistema.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
+			String nomedozistema = nome.getText();
+			if(!nomedozistema.isBlank()) {
+				System.out.println("Criando Sistema "+nomedozistema);
+				sys.setNome(nomedozistema);
+				ArrayList<String> nomes = DadosDeBanco.PegarNomes(new Sistema());
+				if(nomes.contains(nomedozistema)) {
+					int contador = 0;
+					for(String s : nomes) {
+						if(s.contains(nomedozistema)) {
+							contador++;
+						}
+					}
+					sys.setVersao(contador+".0");
+				}
+				else {
+					sys.setVersao(1+".0");
+				}
+				DadosDeBanco.SalvarUnico(sys);
+				LimparTudo();
+			}
+			else {
+				System.out.println("O Nome Do Sistema Esta Vazio");
+			}
+			}});
+		
+		botaocaracteristicaa.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
 
+			String caracteristica = (String) caracteristicasexi.getSelectedItem();
+			if(!caracteristica.contentEquals("Selecione") && !caracteristica.contentEquals("Atualizar")) {
+				System.out.println("Inserindo Caracteristica "+caracteristica+" No Sistema");
+				sys.getCaracteristicas().add(caracteristica);
+				AtualizarCaracteristicas();
+			}
+			else {
+				System.out.println("Nenhuma Caracteristica Selecionada");
+			}
+			}});
+		
+		botaocaracteristicar.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
+			String caracteristica = (String) caracteristicasexi.getSelectedItem();
+			if(!caracteristica.contentEquals("Selecione")) {
+				if(sys.getCaracteristicas().contains(caracteristica)) {
+					System.out.println("Removendo Caracteristica "+caracteristica+" Do Sistema");
+					sys.getCaracteristicas().remove(caracteristica);
+					AtualizarCaracteristicas();
+				}
+				else {
+					System.out.println("A Caracteristica "+caracteristica+" Non Ecziste");
+				}
+			}
+			else {
+				System.out.println("Nenhuma Caracteristica Selecionada");
+			}
+			}});
+		
+		botaosegmentoa.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
+			String nomeinserido = nomesegmentos.getText();
+			if(!nomeinserido.isBlank()) {
+				System.out.println("Inserindo Segmento "+nomeinserido+" No Sistema");
+				sys.getSegmentos().add(nomeinserido);
+				AtualizarSegmentos();
+			}
+			else {
+				System.out.println("O Nome Do Segmento Esta Vazio");
+			}
+			}});
+		
+		botaosegmentor.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
+
+			String nomeinserido = nomesegmentos.getText();
+			if(!nomeinserido.isBlank()) {
+				if(sys.getSegmentos().contains(nomeinserido)) {
+					System.out.println("Removendo Segmento "+nomeinserido+" Do Sistema");
+					sys.getSegmentos().remove(nomeinserido);
+					AtualizarSegmentos();
+				}
+				else {
+					System.out.println("O Segmento "+nomeinserido+" Non Ecziste");
+				}
+			}
+			else {
+				System.out.println("O Nome Do Segmento Esta Vazio");
+			}
+			}});
+		
+		caracteristicasexi.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
+			if(caracteristicasexi.getSelectedItem() == "Atualizar") {
+				AtualizarCaracteristicasCombo();
+			}
+			else {
+				System.out.println(caracteristicasexi.getSelectedItem()+" Selecionado");
+			}
+			}});
+	}
+	public void AtualizarSegmentos() {
+		String[] x = new String[sys.getSegmentos().size()];
+		for(int i = 0;i<sys.getSegmentos().size();i++) {
+			x[i] = sys.getSegmentos().get(i);
+		}
+		segmentos.setListData(x);
+	}
+	public void AtualizarCaracteristicas() {
+		String[] x = new String[sys.getCaracteristicas().size()];
+		for(int i = 0;i<sys.getCaracteristicas().size();i++) {
+			x[i] = sys.getCaracteristicas().get(i);
+		}
+		caracteristicas.setListData(x);
+	}
+	public String[] TratarCaracteristicas() {
+		ArrayList<Formato> nomes = DadosDeBanco.Carregar(new Caracteristica());
+		String[] listanomes = new String[nomes.size()];
+		for(int i = 0;i<nomes.size();i++) {
+			Caracteristica s = (Caracteristica) nomes.get(i);
+			listanomes[i] = s.getNome();
+		}
+		return listanomes;
+	}
+	public void AtualizarCaracteristicasCombo() {
+		caracteristicasexi.removeAllItems();
+		caracteristicasexi.addItem("Selecione");
+		for(String s : TratarCaracteristicas()) {
+			caracteristicasexi.addItem(s);
+		}
+		caracteristicasexi.addItem("Atualizar");
+		System.out.println("Lista De Nomes De Caracteristicas Atualizada");
+	}
+	public void LimparTudo() {
+		this.nome = new JTextField();
+		this.nomesegmentos = new JTextField();
+		this.segmentos = new JList<String>();
+		this.caracteristicas = new JList<String>();
+		this.botaosistema = new JButton("Criar");
+		this.botaocaracteristicaa = new JButton("Adicionar Caracteristica");
+		this.botaocaracteristicar = new JButton("Remover Caracteristica");
+		this.botaosegmentoa = new JButton("Adicionar Segmento");
+		this.botaosegmentor = new JButton("Remover Segmento");
+		this.caracteristicasexi = new JComboBox<String>(new String[] {"Selecione","Potato"});
+		this.sys = new Sistema();
+	}
 }

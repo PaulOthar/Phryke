@@ -57,4 +57,11 @@ public class DadosDeBanco {
 		}
 		return formatos;
 	}
+	public static ArrayList<String> PegarNomes(Formato tipo){
+		ArrayList<String> nomes = new ArrayList<String>();
+		for(Formato f : Carregar(tipo)) {
+			nomes.add(f.getNome());
+		}
+		return nomes;
+	}
 }
