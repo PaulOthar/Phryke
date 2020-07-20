@@ -138,6 +138,10 @@ public class Caracteristica extends Formato {
 			contador++;
 		}
 	}
+	@Override
+	public Formato GerarProprioTipo() {
+		return new Caracteristica();
+	}
 	
 	
 }

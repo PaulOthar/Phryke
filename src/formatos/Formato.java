@@ -16,4 +16,5 @@ public abstract class Formato {
 	
 	public abstract String DeDadosParaCodigo();
 	public abstract void DeCodigoParaDados(String Codigo);
+	public abstract Formato GerarProprioTipo();
 }

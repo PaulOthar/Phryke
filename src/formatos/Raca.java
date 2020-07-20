@@ -8,7 +8,7 @@ public class Raca extends Formato {
 	//Algums racas podem variar em custo dentro dos mesmos parametros,oq significa q a pessoa deve optar pelo custo personalizado
 	private ArrayList<Double> custo;
 	//Racas Podem Dar Bonus em certas caracteristicas, e como nao sabemos quais caracteristicas estamos brincando, eu usei ArrayList
-	private ArrayList<Caracteristica> caracteristicasbonus;
+	private ArrayList<CaracteristicaMod> caracteristicasbonus;
 	/*
 	Peculiaridades seriam como perks, a habilidade de voar, por exemplo, ou ter um braco mecanico...
 	Cada sistema pode variar com peculiaridades, pretendo englobar ate magia
@@ -33,7 +33,7 @@ public class Raca extends Formato {
 		this.setDescricao(new String());
 		this.setSuperraca(new String());
 		this.setSistema(new String());
-		this.setCaracteristicasbonus(new ArrayList<Caracteristica>());
+		this.setCaracteristicasbonus(new ArrayList<CaracteristicaMod>());
 	}
 	public Raca(String nome) {
 		this.setCusto(new ArrayList<Double>());
@@ -41,7 +41,7 @@ public class Raca extends Formato {
 		this.setDescricao(new String());
 		this.setSuperraca(new String());
 		this.setSistema(new String());
-		this.setCaracteristicasbonus(new ArrayList<Caracteristica>());
+		this.setCaracteristicasbonus(new ArrayList<CaracteristicaMod>());
 		super.setNome(nome);
 	}
 	public Raca(String nome,String descricao,String superraca,String sistema) {
@@ -51,7 +51,44 @@ public class Raca extends Formato {
 		this.setDescricao(descricao);
 		this.setSuperraca(superraca);
 		this.setSistema(sistema);
-		this.setCaracteristicasbonus(new ArrayList<Caracteristica>());
+		this.setCaracteristicasbonus(new ArrayList<CaracteristicaMod>());
+	}
+	
+	public void ConfigurarViaSistema(ArrayList<Sistema> sys,ArrayList<Caracteristica> ca) {
+		for(Sistema s : sys) {
+			if(s.getNome() == this.getSistema()) {
+				for(Caracteristica c : s.PegarCaracteristicas(ca)) {
+					this.CriarCaracteristicaBonus(c.getNome());
+					this.InserirValorNaCaracteristica(c.getNome(), c.getValor());
+				}
+				for(String ss : s.getSegmentos()) {
+					this.CriarSegmentoDePeculiaridade(ss);
+				}
+			}
+		}
+	}
+	
+	public void ReceberModificadores(ArrayList<CaracteristicaMod> mod) {
+		for(CaracteristicaMod m : mod) {
+			for(CaracteristicaMod mm : this.getCaracteristicasbonus()) {
+				if(m.getNome() == mm.getNome()) {
+					SomarModificadorCaracteristica(mm.getNome(),m.getModificador());
+				}
+			}
+		}
+	}
+	public void ReceberPeculiaridades(Peculiaridade p) {
+		for(ArrayList<String> arls : this.getPeculiaridades()) {
+			if(arls.get(0).contentEquals(p.getNome())) {
+				this.InserirPeculiaridadeNoSegmeno(arls.get(0), p.getNome());
+				this.ReceberModificadores(p.getCaracteristicasbonus());
+			}
+		}
+	}
+	public void ReceberSuperRaca(SuperRaca r) {
+		this.setSuperraca(r.getNome());
+		this.SomarPeculiaridades(r.getPeculiaridades());
+		this.ReceberModificadores(r.getCaracteristicasbonus());
 	}
 	
 	public void CriarSegmentoDePeculiaridade(String nomesegmento) {
@@ -142,21 +179,32 @@ public class Raca extends Formato {
 			}
 		}
 	}
+	public void SomarPeculiaridades(ArrayList<ArrayList<String>> peculiaridades) {
+		for(ArrayList<String> segmento : peculiaridades) {
+			for(ArrayList<String> segmentointerno : this.getPeculiaridades()) {
+				if(segmento.get(0) == segmentointerno.get(0)) {
+					for(int i = 1;i<segmento.size();i++) {
+						this.InserirPeculiaridadeNoSegmeno(segmento.get(0), segmento.get(i));
+					}
+				}
+			}
+		}
+	}
 	
 	public void CriarCaracteristicaBonus(String nomedacaracteristica) {
-		this.getCaracteristicasbonus().add(new Caracteristica(nomedacaracteristica));
+		this.getCaracteristicasbonus().add(new CaracteristicaMod(nomedacaracteristica));
 	}
 	public void InserirValorNaCaracteristica(String nomedacaracteristica,Double valor) {
 		for(int i = 0;i<this.getCaracteristicasbonus().size();i++) {
 			if(this.getCaracteristicasbonus().get(i).getNome().contentEquals(nomedacaracteristica)) {
-				this.getCaracteristicasbonus().get(i).setValor(valor);
+				this.getCaracteristicasbonus().get(i).setModificador(valor);
 			}
 		}
 	}
 	public void EditarCaracteristica(String nomedacaracteristicainicial,String nomedacaracteristicaatual) {
 		for(int i = 0;i<this.getCaracteristicasbonus().size();i++) {
 			if(this.getCaracteristicasbonus().get(i).getNome().contentEquals(nomedacaracteristicainicial)) {
-				this.getCaracteristicasbonus().get(i).setNome(nomedacaracteristicaatual);;
+				this.getCaracteristicasbonus().get(i).setNome(nomedacaracteristicaatual);
 			}
 		}
 	}
@@ -164,6 +212,13 @@ public class Raca extends Formato {
 		for(int i = 0;i<this.getCaracteristicasbonus().size();i++) {
 			if(this.getCaracteristicasbonus().get(i).getNome().contentEquals(nomedacaracteristica)) {
 				this.getCaracteristicasbonus().remove(i);
+			}
+		}
+	}
+	public void SomarModificadorCaracteristica(String nomedacaracteristica,Double valor) {
+		for(int i = 0;i<this.getCaracteristicasbonus().size();i++) {
+			if(this.getCaracteristicasbonus().get(i).getNome().contentEquals(nomedacaracteristica)) {
+				this.getCaracteristicasbonus().get(i).setModificador(this.getCaracteristicasbonus().get(i).getModificador() + valor);
 			}
 		}
 	}
@@ -195,7 +250,7 @@ public class Raca extends Formato {
 	public ArrayList<Double> getCusto() {
 		return custo;
 	}
-	public ArrayList<Caracteristica> getCaracteristicasbonus() {
+	public ArrayList<CaracteristicaMod> getCaracteristicasbonus() {
 		return caracteristicasbonus;
 	}
 	public ArrayList<ArrayList<String>> getPeculiaridades() {
@@ -214,7 +269,7 @@ public class Raca extends Formato {
 	public void setCusto(ArrayList<Double> custo) {
 		this.custo = custo;
 	}
-	public void setCaracteristicasbonus(ArrayList<Caracteristica> caracteristicasbonus) {
+	public void setCaracteristicasbonus(ArrayList<CaracteristicaMod> caracteristicasbonus) {
 		this.caracteristicasbonus = caracteristicasbonus;
 	}
 	public void setPeculiaridades(ArrayList<ArrayList<String>> peculiaridades) {
@@ -231,11 +286,11 @@ public class Raca extends Formato {
 			Custo = Custo + c;
 		}
 		
-		for(Caracteristica c : this.getCaracteristicasbonus()) {
+		for(CaracteristicaMod c : this.getCaracteristicasbonus()) {
 			if(!Caracteristica.isBlank()) {
 				Caracteristica = Caracteristica + secundario;
 			}
-			Caracteristica = Caracteristica + c.getNome() + terciario + c.getDescricao()  + terciario + c.getRegra()  + terciario + c.getValor()  + terciario + c.getValormaximo()  + terciario + c.getValorminimo();
+			Caracteristica = Caracteristica + c.getNome() + terciario + c.getModificador();
 		}
 		
 		for(ArrayList<String> arls : this.getPeculiaridades()) {
@@ -282,7 +337,7 @@ public class Raca extends Formato {
 			case 5:
 				for(String ss : s.split(secundario)) {
 					
-					Caracteristica c = new Caracteristica();
+					CaracteristicaMod c = new CaracteristicaMod();
 					int contadeiro = 0;
 					
 					for(String sss : ss.split(terciario)) {
@@ -291,19 +346,7 @@ public class Raca extends Formato {
 							c.setNome(sss);
 							break;
 						case 1:
-							c.setDescricao(sss);
-							break;
-						case 2:
-							c.setRegra(sss);
-							break;
-						case 3:
-							c.setValor(Double.parseDouble(sss));
-							break;
-						case 4:
-							c.setValormaximo(Double.parseDouble(sss));
-							break;
-						case 5:
-							c.setValorminimo(Double.parseDouble(sss));
+							c.setModificador(Double.parseDouble(sss));
 							break;
 						}
 						contadeiro++;
@@ -329,6 +372,11 @@ public class Raca extends Formato {
 			}
 			contador++;
 		}
+	}
+	@Override
+	public Formato GerarProprioTipo() {
+		// TODO Auto-generated method stub
+		return new Raca();
 	}
 	
 }
