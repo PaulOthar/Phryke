@@ -18,7 +18,7 @@ public class SistemaConsultar extends Pagina {
 	private JComboBox<String> sistemas = new JComboBox<String>(new String[] {"Selecione"});
 	private JTextArea visualizador = new JTextArea();
 		
-	private JComboBox<String> regras = new JComboBox<String>(new String[] {"Selecione"});
+	private JComboBox<String> regras = new JComboBox<String>(new String[] {"Em Desenvolvimento"});
 	private JTextArea descricao = new JTextArea();
 	
 	
@@ -46,7 +46,6 @@ public class SistemaConsultar extends Pagina {
 	}
 	public void Funcionalidade() {
 		sistemas.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
-
 			if(sistemas.getSelectedItem() == "Atualizar") {
 				AtualizarNomes();
 			}
@@ -68,17 +67,19 @@ public class SistemaConsultar extends Pagina {
 				}
 				for(Formato f : DadosDeBanco.Carregar(new Caracteristica())) {
 					for(String s : sis.getCaracteristicas()) {
-						if(f.getNome() == s) {
+						if(f.getNome().contentEquals(s)) {
 							c.add((Caracteristica) f);
 						}
 					}
 				}
 				texto.add("Nome: "+sis.getNome());
 				texto.add("Versao: "+sis.getVersao());
+				texto.add("\n");
 				texto.add("Caracteristicas:");
 				for(Caracteristica cc : c) {
 					texto.add(cc.getNome()+" : Minimo:"+cc.getValorminimo()+" / Base:"+cc.getValor()+" / Maximo:"+cc.getValormaximo());
 				}
+				texto.add("\n");
 				texto.add("Segmentos:");
 				for(String s : sis.getSegmentos()) {
 					texto.add("+"+s);
