@@ -46,10 +46,11 @@ public class SistemaConsultar extends Pagina {
 	}
 	public void Funcionalidade() {
 		sistemas.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
+
 			if(sistemas.getSelectedItem() == "Atualizar") {
 				AtualizarNomes();
 			}
-			else {
+			else if(sistemas.getSelectedItem() != "Selecione"){
 				System.out.println(sistemas.getSelectedItem()+" Selecionado");
 				ArrayList<String> texto = new ArrayList<String>();
 				String textoformatado = new String();
