@@ -1,14 +1,9 @@
 package main;
 
-import java.util.ArrayList;
-
 import ferramentas.ManipuladorDeArquivo;
-import formatos.*;
-import recursosLogicos.DadosDeBanco;
+import ferramentas.Mensageiro;
 
 public class Teste {
-
 	public static void main(String[] args) {
 	}
-
 }

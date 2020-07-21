@@ -260,4 +260,14 @@ public class ManipuladorDeArquivo {
 		}
 		sobreescreverArquivoLista(arquivo,lista);
 	}
+	public static void ApagarArquivoLinha(File arquivo,String texto) {
+		ArrayList<String> documento = new ArrayList<String>();
+		documento = lerArquivoLinhas(arquivo);
+		for(int i = 0;i<documento.size();i++) {
+			if(documento.get(i).contains(texto)) {
+				documento.remove(i);
+			}
+		}
+		sobreescreverArquivoLista(arquivo,documento);
+	}
 }

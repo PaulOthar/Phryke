@@ -12,5 +12,15 @@ public class Mensageiro {
 	public static int PedirInteiro(String message) {
 		return Integer.parseInt(JOptionPane.showInputDialog(message,-1));
 	}
+	public static boolean PedirConfirmacao(String mensagem) {
+		boolean b = false;
+		if(JOptionPane.showConfirmDialog(null, mensagem,"",JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			b = true;
+		}
+		else {
+			b = false;
+		}
+		return b;
+	}
 	
 }

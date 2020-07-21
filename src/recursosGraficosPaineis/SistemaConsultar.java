@@ -4,10 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import ferramentas.Mensageiro;
 import formatos.Caracteristica;
 import formatos.Formato;
 import formatos.Sistema;
@@ -21,6 +23,8 @@ public class SistemaConsultar extends Pagina {
 	private JComboBox<String> regras = new JComboBox<String>(new String[] {"Em Desenvolvimento"});
 	private JTextArea descricao = new JTextArea();
 	
+	private JButton removerregra = new JButton("Remover Regra");
+	private JButton excluir = new JButton("Excluir Sistema");
 	
 	@Override
 	public JPanel GerarPainel() {
@@ -39,12 +43,39 @@ public class SistemaConsultar extends Pagina {
 		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(sistemas, 0, 0, 1, 1, "Sistemas"));
 		super.adicionaraopainel(ManipuladorPosicionativo.AdicionarComBorda(regras, 1, 0, 1, 1, "Regras"));
 		
+		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(removerregra, 1, 2, 1, 1));
+		super.adicionaraopainel(ManipuladorPosicionativo.Adicionar(excluir, 0, 2, 1, 1));
+		
 		AtualizarNomes();
 		Funcionalidade();
 		
 		return super.getPainel();
 	}
 	public void Funcionalidade() {
+		removerregra.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
+			}});
+		
+		excluir.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
+			if(sistemas.getSelectedItem() != "Atualizar" && sistemas.getSelectedItem() != "Selecione") {
+				if(Mensageiro.PedirConfirmacao("Deseja Mesmo Excluir o Sistema "+sistemas.getSelectedItem()+"?")) {
+					ArrayList<Sistema> sys = new ArrayList<Sistema>();
+					Sistema sis = new Sistema();
+					for(Formato f : DadosDeBanco.Carregar(new Sistema())) {
+						sys.add((Sistema)f);
+					}
+					for(Sistema s : sys) {
+						String nome = s.getNome()+" - "+s.getVersao();
+						if(sistemas.getSelectedItem().equals(nome)) {
+							sis = s;
+						}
+					}
+					DadosDeBanco.Excluir(sis);
+				}
+				
+			}
+			
+		}});
+		
 		sistemas.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
 
 			if(sistemas.getSelectedItem() == "Atualizar") {
@@ -112,5 +143,8 @@ public class SistemaConsultar extends Pagina {
 		}
 		sistemas.addItem("Atualizar");
 		System.out.println("Lista De Nomes De Sistema Atualizada");
+	}
+	public void SetarPainel(JPanel p) {
+		super.setPainel(p);
 	}
 }

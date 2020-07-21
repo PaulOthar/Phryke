@@ -67,4 +67,11 @@ public class DadosDeBanco {
 	public static void Substituir (Formato tipovelho,Formato tiponovo) {
 		ManipuladorDeArquivo.SubstituirArquivoLinha(ManipuladorDeArquivo.selecionarArquivoPorNome(pasta, tipovelho.getClass().getSimpleName()+".txt"), tipovelho.DeDadosParaCodigo(), tiponovo.DeDadosParaCodigo());
 	}
+	public static void Excluir(Formato tipoexcluir) {
+		ManipuladorDeArquivo.ApagarArquivoLinha(ManipuladorDeArquivo.selecionarArquivoPorNome(pasta, ObtertipoComTXT(tipoexcluir)), tipoexcluir.DeDadosParaCodigo());
+	}
+	
+	public static String ObtertipoComTXT(Formato tipo) {
+		return tipo.getClass().getSimpleName()+".txt";
+	}
 }
