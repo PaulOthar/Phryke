@@ -1,6 +1,0 @@
-Força;;;;0.0;5.0;0.0     
-Habilidade;;;;0.0;5.0;0.0    
-Resistencia;;;;0.0;5.0;0.0   
-Cheeos;;;;0.0;0.0;0.0  
-dfgdfgdfgfdgfdg;;;;0.0;0.0;0.0 
-ggggg;;;;0.0;0.0;0.0
