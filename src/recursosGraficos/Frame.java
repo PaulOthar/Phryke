@@ -102,6 +102,7 @@ public class Frame {
 		menu = InserirItens(menu,"Racas",new String[] {"Criar Raca","Consultar Raca"},new JPanel[] {new RacaCriar().GerarPainel(),new RacaConsultar().GerarPainel()});
 		menu = InserirItens(menu,"Super Racas",new String[] {"Criar Super Raca","Consultar Super Raca"},new JPanel[] {new SuperRacaCriar().GerarPainel(),new SuperRacaConsultar().GerarPainel()});
 		menu = InserirItens(menu,"Fichas",new String[] {"Criar Ficha","Consultar Ficha"},new JPanel[] {new FichaCriar().GerarPainel(),new FichaConsultar().GerarPainel()});
+		menu = InserirItens(menu,"Teste",new String[] {"Teste Sistema"},new JScrollPane[] {new CriarSistema().GerarPainelScrollavel()});
 		menu.add(f);
 		
 		f.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
@@ -111,6 +112,30 @@ public class Frame {
 		return menu;
 	}
 	public static JMenu InserirItens(JMenu menu,String nomesubmenu,String[] nomeitens,JPanel[] paineis) {
+		
+		JMenu submenu = new JMenu(nomesubmenu);
+		
+		if(nomeitens.length == paineis.length) {
+			for(int i = 0;i<nomeitens.length;i++) {
+				JMenuItem item = new JMenuItem(nomeitens[i]);
+				int index = izdadus.size();
+				izdadus.add(false);
+				System.out.println(izdadus.size());
+				int x = i;
+				item.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e) {
+					System.out.println(x);
+					System.out.println(index);
+					UsarAbas(nomeitens[x],index,paineis[x]);
+					}});
+				
+				submenu.add(item);
+			}
+		}
+		
+		menu.add(submenu);
+		return menu;
+	}
+	public static JMenu InserirItens(JMenu menu,String nomesubmenu,String[] nomeitens,JScrollPane[] paineis) {
 		
 		JMenu submenu = new JMenu(nomesubmenu);
 		
@@ -314,6 +339,16 @@ public class Frame {
 		}
 	}
 	public static void UsarAbas(String titulo,int index,JPanel painel) {
+		if(izdadus.get(index)) {
+			abas.removeTabAt(abas.indexOfTab(titulo));
+			izdadus.set(index, false);
+		}
+		else {
+			abas.addTab(titulo,painel);
+			izdadus.set(index, true);
+		}
+	}
+	public static void UsarAbas(String titulo,int index,JScrollPane painel) {
 		if(izdadus.get(index)) {
 			abas.removeTabAt(abas.indexOfTab(titulo));
 			izdadus.set(index, false);

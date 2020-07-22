@@ -2,7 +2,9 @@ package recursosGraficosPaineis;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
+import recursosGraficos.ManipuladorDeComponente;
 import recursosGraficos.ManipuladorPosicionativo;
 
 public abstract class Pagina {
@@ -14,6 +16,12 @@ public abstract class Pagina {
 	}
 	
 	public abstract JPanel GerarPainel();
+	
+	public JScrollPane GerarPainelScrollavel(){
+		JScrollPane Scrollado = ManipuladorDeComponente.Scroll(GerarPainel());
+		Scrollado.getVerticalScrollBar().setUnitIncrement(15);
+		return Scrollado;
+	}
 	
 	public void adicionaraopainel(JComponent componente) {
 		this.getPainel().add(componente);
