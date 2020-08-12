@@ -14,27 +14,27 @@ public abstract class Pagina {
 		ManipuladorPosicionativo.Resetar();
 		this.setPainel(new JPanel());
 	}
-	
+
+	public void adicionaraopainel(JComponent componente) {
+		this.getPainel().add(componente);
+	}
+
 	public abstract JPanel GerarPainel();
-	
-	public JScrollPane GerarPainelScrollavel(){
+
+	public JScrollPane GerarPainelScrollavel() {
 		JScrollPane Scrollado = ManipuladorDeComponente.Scroll(GerarPainel());
 		Scrollado.getVerticalScrollBar().setUnitIncrement(15);
 		return Scrollado;
 	}
-	
-	public void adicionaraopainel(JComponent componente) {
-		this.getPainel().add(componente);
+
+	public JPanel getPainel() {
+		return painel;
 	}
-	
+
 	public void Inicializar() {
 		ManipuladorPosicionativo.Inicializar();
 		this.setPainel(new JPanel());
 		this.getPainel().setLayout(ManipuladorPosicionativo.getLayout());
-	}
-	
- 	public JPanel getPainel() {
-		return painel;
 	}
 
 	public void setPainel(JPanel painel) {
