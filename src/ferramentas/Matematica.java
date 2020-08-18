@@ -82,6 +82,35 @@ public class Matematica {
 		}
 		return eq2;
 	}
+	
+	public static String Calcular(String equacao) {
+		ArrayList<String> eqdiv = new ArrayList<String>();
+		for(char c : equacao.toCharArray()) {
+			eqdiv.add(c+"");
+		}
+		while(eqdiv.contains("+") || eqdiv.contains("-") || eqdiv.contains("/") || eqdiv.contains("*")) {
+			//Antes Que Me Crucifique Por ter usado muitos ifs elses, entenda que eu precisava de uma sequencia de prioridade.
+			if(eqdiv.contains("*")) {
+				int index = localizar(eqdiv,"*");
+				eqdiv.set(index-1, ""+Multiplicar(Double.parseDouble(eqdiv.get(index-1)),Double.parseDouble(eqdiv.get(index+1))));
+			}
+			else if(eqdiv.contains("/")){
+				
+			}
+			else if(eqdiv.contains("+")){
+				
+			}
+			else if(eqdiv.contains("-")){
+				
+			}
+		}
+		
+		return eqdiv.get(0);
+	}
+	
+	public static int localizar(ArrayList<String> eqdiv,String operador) {
+		return eqdiv.indexOf(operador);
+	}
 
 	public static double Dividir(double numero1, double numero2) {
 		try {

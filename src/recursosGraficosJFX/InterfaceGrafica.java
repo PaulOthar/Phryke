@@ -11,6 +11,7 @@ public class InterfaceGrafica extends Application {
 		launch(args);
 	}
 
+	
 	@Override
 	public void start(Stage palco) throws Exception {
 		Parent raiz = FXMLLoader.load(getClass().getResource("GraficoFXML.fxml"));
