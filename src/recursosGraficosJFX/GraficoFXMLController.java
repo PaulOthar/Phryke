@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -56,8 +57,23 @@ public class GraficoFXMLController implements Initializable {
 		CriSiValorBaseVerificado.setCellValueFactory(new PropertyValueFactory<>("valor"));
 		CriSiValorMinimoVerificado.setCellValueFactory(new PropertyValueFactory<>("valorminimo"));
 		CriSiValorMaximoVerificado.setCellValueFactory(new PropertyValueFactory<>("valormaximo"));
+		
+		ConSiNomeSistemaTabela.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+		ConSiVersaoSistemaTabela.setCellValueFactory(new PropertyValueFactory<>("versao"));
+		ConSiNomeCaracteristicaTabela.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+		ConSiValorBaseCaracteristicaTabela.setCellValueFactory(new PropertyValueFactory<>("valor"));
+		ConSiValorMinimoCaracteristicaTabela.setCellValueFactory(new PropertyValueFactory<>("valorminimo"));
+		ConSiValorMaximoCaracteristicaTabela.setCellValueFactory(new PropertyValueFactory<>("valormaximo"));
+		ConSiNomeCaracteristicaReferenciaTabela.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+		ConSiNomeReferenciaReferenciaTabela.setCellValueFactory(new PropertyValueFactory<>("referencia"));
+		ConSiModificadorReferenciaTabela.setCellValueFactory(new PropertyValueFactory<>("operadoraparente"));
+		ConSiNomeSegmentoTabela.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+		ConSiValorAssociadoSegmentoTabela.setCellValueFactory(new PropertyValueFactory<>("ValorAssociado"));
+		
+		for(Formato s : DadosDeBanco.Carregar(new Sistema())) {
+			ConSiSistemasTabela.getItems().add((Sistema) s);
+		}
 	}
-	
 	
 	//---Menu e Abas---
 	
@@ -459,9 +475,102 @@ public class GraficoFXMLController implements Initializable {
     }
     
     
-	//--- ---
+	//---Consultar Sistema(ConSi)---
 
-        
-        
+    @FXML
+    private TableView<Sistema> ConSiSistemasTabela;
+    @FXML
+    private TableColumn<String, String> ConSiNomeSistemaTabela;
+    @FXML
+    private TableColumn<String, String> ConSiVersaoSistemaTabela;
+    @FXML
+    private WebView ConSiDescricaoSistema;
+    @FXML
+    private Label ConSiNomeSistema;
+    @FXML
+    private Label ConSiVersaoSistema;
+    @FXML
+    private TableView<Caracteristica> ConSiCaracteristicasTabela;
+    @FXML
+    private TableColumn<String, String> ConSiNomeCaracteristicaTabela;
+    @FXML
+    private TableColumn<String, String> ConSiValorBaseCaracteristicaTabela;
+    @FXML
+    private TableColumn<String, String> ConSiValorMinimoCaracteristicaTabela;
+    @FXML
+    private TableColumn<String, String> ConSiValorMaximoCaracteristicaTabela;
+    @FXML
+    private TableView<Caracteristica> ConSiCaracteristicasReferenciaTabela;
+    @FXML
+    private TableColumn<String, String> ConSiNomeCaracteristicaReferenciaTabela;
+    @FXML
+    private TableColumn<String, String> ConSiNomeReferenciaReferenciaTabela;
+    @FXML
+    private TableColumn<String, String> ConSiModificadorReferenciaTabela;
+    @FXML
+    private TableView<Segmento> ConSiSegmentoTabela;
+    @FXML
+    private TableColumn<String, String> ConSiNomeSegmentoTabela;
+    @FXML
+    private TableColumn<String, String> ConSiValorAssociadoSegmentoTabela;
+    @FXML
+    private ComboBox<Regra> ConSiRegrasSistema;
+    @FXML
+    private WebView ConSiTextoRegrasSistema;
+    private Sistema s = new Sistema();
+    
+    @FXML
+    void ConSiEditarSistema(ActionEvent event) {
 
+    }
+    @FXML
+    void ConSiRemoverSistema(ActionEvent event) {
+
+    }
+    @FXML
+    void ConSiSelecionarRegra(ActionEvent event) {
+    	
+    }
+    @FXML
+    void ConSiSelecionarSistema(MouseEvent event) {
+    	if(ConSiSistemasTabela.getSelectionModel().getSelectedItem() != s) {
+    		try {
+        		s = ConSiSistemasTabela.getSelectionModel().getSelectedItem();
+        		ConSiNomeSistema.setText(s.getNome());
+        		ConSiVersaoSistema.setText(s.getVersao());
+        		ConSiDescricaoSistema.getEngine().loadContent(s.getDescricao());
+        		for(Caracteristica c : s.getCaracteristicas()) {
+        			if(c.getOperador().isBlank()) {
+        				ConSiCaracteristicasTabela.getItems().add(c);
+        			}
+        			else {
+        				c.Aparencias();
+        				ConSiCaracteristicasReferenciaTabela.getItems().add(c);
+        			}
+        		}
+        		for(Segmento seg : s.getSegmentos()) {
+        			ConSiSegmentoTabela.getItems().add(seg);
+        		}
+        		for(Regra r : s.getRegras()) {
+        			ConSiRegrasSistema.getItems().add(r);
+        		}
+        	}
+        	catch(Exception e) {
+        		
+        	}
+    	}
+    	
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

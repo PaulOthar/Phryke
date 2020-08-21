@@ -37,6 +37,7 @@ public class Segmento extends Formato {
 				this.setValorAssociado(s);
 				break;
 			}
+			contador++;
 		}
 			
 	}

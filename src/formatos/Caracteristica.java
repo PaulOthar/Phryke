@@ -3,13 +3,13 @@ package formatos;
 import java.util.ArrayList;
 
 public class Caracteristica extends Formato {
-	private String descricao, operador;
+	private String descricao, operador,operadoraparente;
 	private Caracteristica referencia;
 	private double valor, valorminimo, valormaximo, modificador;
 	private boolean referenciado = false;
 	
 	public static final String soma = "Soma(+)",subtracao = "Subtracao(-)",multiplicacao = "Multiplicacao(x)",divisao = "Divisao(/)";
-
+	
 	public Caracteristica() {
 		super.setNome(new String());
 		this.setDescricao(new String());
@@ -58,6 +58,7 @@ public class Caracteristica extends Formato {
 		this.setModificador(modificador);
 		this.DefinirValoresViaRegra(referencia);
 		this.setReferenciado(true);
+		this.Aparencias();
 	}
 	
 	// Lembrar de implementar
@@ -90,7 +91,7 @@ public class Caracteristica extends Formato {
 				this.setModificador(Double.parseDouble(s));
 				break;
 			case 6:
-				this.setOperador("");
+				this.setOperador(s);
 				break;
 			case 7:
 				this.setReferencia(new Caracteristica(s));
@@ -123,7 +124,7 @@ public class Caracteristica extends Formato {
 		else {
 			codigo = super.getNome() + primario + this.getDescricao() + primario + this.getValor() + primario
 					+ this.getValormaximo() + primario + this.getValorminimo() + primario
-					+ this.getModificador() + primario + this.getOperador() + primario + "x" + primario
+					+ 0 + primario + "" + primario + "x" + primario
 					+ 0 + primario + 0 + primario + 0;
 		}
 		return codigo;
@@ -193,6 +194,23 @@ public class Caracteristica extends Formato {
 		}
 	}
 	
+	public void Aparencias() {
+		switch(operador) {
+		case soma:
+			this.setOperadoraparente("+"+modificador);
+			break;
+		case subtracao:
+			this.setOperadoraparente("-"+modificador);
+			break;
+		case divisao:
+			this.setOperadoraparente("/"+modificador);
+			break;
+		case multiplicacao:
+			this.setOperadoraparente("x"+modificador);
+			break;
+		}
+	}
+	
 	@Override
 	public Formato GerarProprioTipo() {
 		return new Caracteristica();
@@ -230,6 +248,10 @@ public class Caracteristica extends Formato {
 		return referenciado;
 	}
 
+	public String getOperadoraparente() {
+		return operadoraparente;
+	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
@@ -261,6 +283,10 @@ public class Caracteristica extends Formato {
 
 	public void setReferenciado(boolean referenciado) {
 		this.referenciado = referenciado;
+	}
+
+	public void setOperadoraparente(String operadoraparente) {
+		this.operadoraparente = operadoraparente;
 	}
 
 	@Override

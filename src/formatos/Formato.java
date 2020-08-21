@@ -1,7 +1,7 @@
 package formatos;
 
 public abstract class Formato {
-	public static final String primario = ";", secundario = "#", terciario = "¬";
+	public static final String primario = "¢", secundario = "#", terciario = "¬";
 
 	// Bem... todo Formato Vai ter nome, como Raca, Super Racas,
 	// Vantagens,Desvantagens, por ai vai...

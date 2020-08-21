@@ -7,7 +7,9 @@ public class Sistema extends Formato {
 	// 3d&t tem habilidade....
 	// Caracteristicas: Forca, habilidade...
 	// Segmentos: Vantagens..desvantagens...magias...pericias.......
-	private ArrayList<Formato> caracteristicas, segmentos, regras;
+	private ArrayList<Segmento>  segmentos;
+	private ArrayList<Caracteristica> caracteristicas;
+	private ArrayList<Regra> regras;
 	private String descricao;
 
 	private String versao;
@@ -15,9 +17,9 @@ public class Sistema extends Formato {
 	public Sistema() {
 		super.setNome(new String());
 		this.setVersao(new String());
-		this.setCaracteristicas(new ArrayList<Formato>());
-		this.setSegmentos(new ArrayList<Formato>());
-		this.setRegras(new ArrayList<Formato>());
+		this.setCaracteristicas(new ArrayList<Caracteristica>());
+		this.setSegmentos(new ArrayList<Segmento>());
+		this.setRegras(new ArrayList<Regra>());
 	}
 
 	@Override
@@ -32,16 +34,19 @@ public class Sistema extends Formato {
 				this.setNome(s);
 				break;
 			case 2:
+				this.setDescricao(s);
+				break;
+			case 3:
 				for (String ss : s.split(secundario)) {
 					this.getCaracteristicas().add(new Caracteristica(ss,true));
 				}
 				break;
-			case 3:
+			case 4:
 				for (String ss : s.split(secundario)) {
 					this.getSegmentos().add(new Segmento(ss,true));
 				}
 				break;
-			case 4:
+			case 5:
 				for (String ss : s.split(secundario)) {
 					this.getRegras().add(new Regra(ss,true));
 				}
@@ -76,7 +81,7 @@ public class Sistema extends Formato {
 			regras = regras + s.DeDadosParaCodigo();
 		}
 
-		codigo = this.getVersao() + terciario + super.getNome() + terciario + caracteristicas + terciario + segmentos
+		codigo = this.getVersao() + terciario + super.getNome() + terciario + this.getDescricao() + terciario + caracteristicas + terciario + segmentos
 				+ terciario + regras;
 		return codigo;
 	}
@@ -87,15 +92,15 @@ public class Sistema extends Formato {
 		return new Sistema();
 	}
 
-	public ArrayList<Formato> getCaracteristicas() {
+	public ArrayList<Caracteristica> getCaracteristicas() {
 		return caracteristicas;
 	}
 
-	public ArrayList<Formato> getRegras() {
+	public ArrayList<Regra> getRegras() {
 		return regras;
 	}
 
-	public ArrayList<Formato> getSegmentos() {
+	public ArrayList<Segmento> getSegmentos() {
 		return segmentos;
 	}
 
@@ -107,15 +112,15 @@ public class Sistema extends Formato {
 		return descricao;
 	}
 
-	public void setCaracteristicas(ArrayList<Formato> caracteristicas) {
+	public void setCaracteristicas(ArrayList<Caracteristica> caracteristicas) {
 		this.caracteristicas = caracteristicas;
 	}
 
-	public void setRegras(ArrayList<Formato> regras) {
+	public void setRegras(ArrayList<Regra> regras) {
 		this.regras = regras;
 	}
 
-	public void setSegmentos(ArrayList<Formato> segmentos) {
+	public void setSegmentos(ArrayList<Segmento> segmentos) {
 		this.segmentos = segmentos;
 	}
 
