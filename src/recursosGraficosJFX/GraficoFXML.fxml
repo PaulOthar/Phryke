@@ -40,11 +40,21 @@
 						</Menu>
 						<Menu mnemonicParsing="false" text="Peculiaridade">
 							<items>
-								<MenuItem mnemonicParsing="false" onAction="#CriarPeculiaridade" text="Criar" />
-								<MenuItem mnemonicParsing="false" onAction="#ConsultarPeculiaridade" text="Consultar" />
+                        <Menu mnemonicParsing="false" text="Criar">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#CriarSuperPeculiaridade" text="Super Peculiaridade" />
+      								<MenuItem mnemonicParsing="false" onAction="#CriarPeculiaridade" text="Peculiaridade" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Consultar">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#ConsultarSuperPeculiaridade" text="Super Peculiaridade" />
+      								<MenuItem mnemonicParsing="false" onAction="#ConsultarPeculiaridade" text="Peculiaridade" />
+                          </items>
+                        </Menu>
 							</items>
 						</Menu>
-						<Menu mnemonicParsing="false" text="Raça">
+						<Menu mnemonicParsing="false" text="Consultar">
 							<items>
 								<Menu mnemonicParsing="false" text="Criar">
 									<items>
@@ -189,14 +199,14 @@
                      <children>
                         <Accordion nodeOrientation="LEFT_TO_RIGHT" prefHeight="446.0" prefWidth="709.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <panes>
-                            <TitledPane prefHeight="397.0" prefWidth="709.0" text="Basico" wrapText="true">
+                            <TitledPane prefHeight="438.0" prefWidth="709.0" text="Basico" wrapText="true">
                               <content>
-                                <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="303.0" prefWidth="707.0">
+                                <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="194.0" prefWidth="707.0">
                                        <children>
-                                          <TextField fx:id="CriSiNomeSistema" alignment="CENTER" layoutY="28.0" onAction="#CriSiInserirNomeSistema" promptText="Nome Do Sistema" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
+                                          <TextField fx:id="CriSiNomeSistema" alignment="TOP_LEFT" layoutY="28.0" onAction="#CriSiInserirNomeSistema" promptText="Nome Do Sistema" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
                                           <Label alignment="TOP_LEFT" layoutX="1.0" layoutY="6.0" text="Nome Do Sistema" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
                                           <Label alignment="TOP_LEFT" layoutX="170.0" layoutY="6.0" text="Versão Do Sistema" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="10.0" />
-                                          <TextField fx:id="CriSiVersaoSistema" alignment="CENTER" layoutX="170.0" layoutY="28.0" onAction="#CriSiInserirVersaoSistema" promptText="Versão Do Sistema" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="25.0" />
+                                          <TextField fx:id="CriSiVersaoSistema" alignment="TOP_LEFT" layoutX="170.0" layoutY="28.0" onAction="#CriSiInserirVersaoSistema" promptText="Versão Do Sistema" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="25.0" />
                                           <HTMLEditor fx:id="CriSiDescricaoSistema" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="14.0" layoutY="90.0" prefHeight="237.0" prefWidth="707.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
                                           <Label layoutX="10.0" layoutY="62.0" text="Descrição Do Sistema" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="60.0" />
                                        </children>
@@ -206,7 +216,7 @@
                                     </AnchorPane>
                               </content>
                             </TitledPane>
-                            <TitledPane prefHeight="419.0" prefWidth="709.0" text="Segmentos">
+                            <TitledPane prefHeight="405.0" prefWidth="709.0" text="Segmentos">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="59.0" prefWidth="707.0">
                                        <children>
@@ -229,7 +239,7 @@
                                        </padding></AnchorPane>
                               </content>
                             </TitledPane>
-                              <TitledPane prefHeight="441.0" prefWidth="709.0" text="Regras">
+                              <TitledPane prefHeight="434.0" prefWidth="709.0" text="Regras">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="65.0" prefWidth="707.0">
                                        <children>
@@ -248,7 +258,7 @@
                                        </padding></AnchorPane>
                                 </content>
                               </TitledPane>
-                            <TitledPane prefHeight="435.0" prefWidth="709.0" text="Características">
+                            <TitledPane prefHeight="451.0" prefWidth="709.0" text="Características">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="707.0">
                                        <children>
@@ -260,17 +270,17 @@
                                                 <TableColumn fx:id="CriSiValorMaximoTabela" prefWidth="90.0" text="Valor Maximo" />
                                             </columns>
                                           </TableView>
-                                          <Button layoutX="14.0" layoutY="287.0" mnemonicParsing="false" onAction="#CriSiCriarCaracteristica" text="Criar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+                                          <Button layoutX="10.0" layoutY="225.0" mnemonicParsing="false" onAction="#CriSiCriarCaracteristica" prefHeight="25.0" prefWidth="150.0" text="Criar" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="210.0" />
                                           <TextField fx:id="CriSiNomeCaracteristica" layoutX="10.0" layoutY="27.0" promptText="Nome Da Característica" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
                                           <Label layoutX="14.0" layoutY="14.0" text="Nome Da Característica" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
                                           <Label layoutX="165.0" layoutY="10.0" text="Tipo De Parâmetro" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="10.0" />
                                           <ComboBox fx:id="CriSiParametro" layoutX="165.0" layoutY="65.0" prefWidth="150.0" promptText="Tipo De Parâmetro" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="25.0" />
-                                          <Button layoutX="61.0" layoutY="292.0" mnemonicParsing="false" onAction="#CriSiEditarCaracteristica" text="Editar" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="55.0" />
-                                          <Button layoutX="114.0" layoutY="292.0" mnemonicParsing="false" onAction="#CriSiRemoverCaracteristica" text="Remover" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="105.0" />
+                                          <Button layoutX="10.0" layoutY="279.0" mnemonicParsing="false" onAction="#CriSiEditarCaracteristica" prefWidth="150.0" text="Editar" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="240.0" />
+                                          <Button layoutX="10.0" layoutY="273.0" mnemonicParsing="false" onAction="#CriSiRemoverCaracteristica" prefWidth="150.0" text="Remover" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="270.0" />
                                           <ChoiceBox fx:id="CriSiReferencia" layoutX="165.0" layoutY="76.0" prefWidth="150.0" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="75.0" />
                                           <ChoiceBox fx:id="CriSiOperador" layoutX="165.0" layoutY="125.0" prefWidth="150.0" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="125.0" />
-                                          <TextField fx:id="CriSiModificador" layoutX="166.0" layoutY="167.0" AnchorPane.leftAnchor="166.0" AnchorPane.topAnchor="175.0" />
-                                          <Label layoutX="165.0" layoutY="150.0" text="Modificador" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="160.0" />
+                                          <TextField fx:id="CriSiModificador" layoutX="166.0" layoutY="167.0" promptText="Valor Modificador" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="225.0" />
+                                          <Label layoutX="165.0" layoutY="150.0" text="Modificador" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="210.0" />
                                           <Label layoutX="166.0" layoutY="59.0" text="Característica Referenciada" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="60.0" />
                                           <Label layoutX="166.0" layoutY="108.0" text="Operador" AnchorPane.leftAnchor="166.0" AnchorPane.topAnchor="110.0" />
                                           <TextField fx:id="CriSiValorBase" layoutX="10.0" layoutY="76.0" promptText="Valor Base" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="75.0" />
@@ -279,13 +289,17 @@
                                           <Label layoutX="10.0" layoutY="61.0" text="Valor Base" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="60.0" />
                                           <Label layoutX="10.0" layoutY="111.0" text="Valor Minimo" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="110.0" />
                                           <Label layoutX="10.0" layoutY="161.0" text="Valor Maximo" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="160.0" />
+                                          <ComboBox fx:id="CriSiTipoModificador" layoutX="166.0" layoutY="224.0" prefWidth="150.0" promptText="Tipo De Modificador" AnchorPane.topAnchor="175.0" />
+                                          <ChoiceBox fx:id="CriSiCaracteristicaModificadora" layoutX="165.0" layoutY="271.0" prefWidth="150.0" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="270.0" />
+                                          <Label layoutX="166.0" layoutY="211.0" text="Tipo De Modificador" AnchorPane.topAnchor="160.0" />
+                                          <Label layoutX="166.0" layoutY="258.0" text="Caracteristica Modificadora" AnchorPane.topAnchor="255.0" />
                                        </children>
                                        <padding>
                                           <Insets top="1.0" />
                                        </padding></AnchorPane>
                               </content>
                             </TitledPane>
-                              <TitledPane prefHeight="415.0" prefWidth="709.0" text="Verificação">
+                              <TitledPane prefHeight="613.0" prefWidth="709.0" text="Verificação">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="707.0">
                                        <children>
@@ -391,7 +405,17 @@
                      </children></AnchorPane>
             </content>
           </Tab>
+            <Tab text="Criar Super Peculiaridade">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
             <Tab text="Criar Peculiaridade">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Consultar Super Peculiaridade">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,6 +42,8 @@ public class GraficoFXMLController implements Initializable {
 		CriSiOperador.getItems().add(Caracteristica.subtracao);
 		CriSiOperador.getItems().add(Caracteristica.divisao);
 		CriSiOperador.getItems().add(Caracteristica.multiplicacao);
+		CriSiTipoModificador.getItems().add("Por Valor");
+		CriSiTipoModificador.getItems().add("Por Referencia");
 		CriSiOperador.getSelectionModel().select(0);
 		CriSiParametro.getItems().add("Por Valor");
 		CriSiParametro.getItems().add("Por Referencia");
@@ -65,8 +68,8 @@ public class GraficoFXMLController implements Initializable {
 		ConSiValorMinimoCaracteristicaTabela.setCellValueFactory(new PropertyValueFactory<>("valorminimo"));
 		ConSiValorMaximoCaracteristicaTabela.setCellValueFactory(new PropertyValueFactory<>("valormaximo"));
 		ConSiNomeCaracteristicaReferenciaTabela.setCellValueFactory(new PropertyValueFactory<>("Nome"));
-		ConSiNomeReferenciaReferenciaTabela.setCellValueFactory(new PropertyValueFactory<>("referencia"));
-		ConSiModificadorReferenciaTabela.setCellValueFactory(new PropertyValueFactory<>("operadoraparente"));
+		ConSiNomeReferenciaReferenciaTabela.setCellValueFactory(new PropertyValueFactory<>("Creferencia1"));
+		ConSiModificadorReferenciaTabela.setCellValueFactory(new PropertyValueFactory<>("aparencia"));
 		ConSiNomeSegmentoTabela.setCellValueFactory(new PropertyValueFactory<>("Nome"));
 		ConSiValorAssociadoSegmentoTabela.setCellValueFactory(new PropertyValueFactory<>("ValorAssociado"));
 		
@@ -102,6 +105,10 @@ public class GraficoFXMLController implements Initializable {
 	}
 	
 	@FXML
+	void ConsultarSuperPeculiaridade(ActionEvent event) {
+		AbrirAbaPorNome("Consultar Super Peculiaridade");
+	}
+	@FXML
 	void ConsultarPeculiaridade(ActionEvent event) {
 		AbrirAbaPorNome("Consultar Peculiaridade");
 	}
@@ -128,6 +135,10 @@ public class GraficoFXMLController implements Initializable {
 	@FXML
 	void CriarClasse(ActionEvent event) {
 		AbrirAbaPorNome("Criar Classe");
+	}
+	@FXML
+	void CriarSuperPeculiaridade(ActionEvent event) {
+		AbrirAbaPorNome("Criar Super Peculiaridade");
 	}
 	@FXML
 	void CriarPeculiaridade(ActionEvent event) {
@@ -165,6 +176,7 @@ public class GraficoFXMLController implements Initializable {
 	void tevira(ActionEvent event) {
 		System.out.println(abas.getTabs());
 	}
+	
 	public void AbrirAbaPorNome(String NomeDaAba) {
 		Tab t = PegarAbaPorNome(NomeDaAba);
 		if (!abas.getTabs().contains(t)) {
@@ -182,7 +194,10 @@ public class GraficoFXMLController implements Initializable {
 
 		return t;
 	}
-	
+	public void SelecionarAbaPorNome(String NomeDaAba) {
+		AbrirAbaPorNome(NomeDaAba);
+		abas.getSelectionModel().select(PegarAbaPorNome(NomeDaAba));
+	}
 	
 	//---Dados(De Jogar)---
 	
@@ -384,6 +399,10 @@ public class GraficoFXMLController implements Initializable {
     private TextField CriSiValorMaximo;
     @FXML
     private TableView<Caracteristica> CriSiTabelaCaracteristicas;
+    @FXML
+    private ChoiceBox<Caracteristica> CriSiCaracteristicaModificadora;
+    @FXML
+    private ComboBox<String> CriSiTipoModificador;
     
     @FXML
     void CriSiCriarCaracteristica(ActionEvent event) {
@@ -392,15 +411,20 @@ public class GraficoFXMLController implements Initializable {
     		Caracteristica c;
     		if(CriSiParametro.getSelectionModel().getSelectedItem().contentEquals("Por Valor")) {
     			c = new Caracteristica(CriSiNomeCaracteristica.getText(),Double.parseDouble(CriSiValorBase.getText()),Double.parseDouble(CriSiValorMinimo.getText()),Double.parseDouble(CriSiValorMaximo.getText()));
-    	    	
     		}
     		else {
-    			c = new Caracteristica(CriSiNomeCaracteristica.getText(),CriSiReferencia.getSelectionModel().getSelectedItem(),CriSiOperador.getSelectionModel().getSelectedItem(),Double.parseDouble(CriSiModificador.getText()));
+    			if(CriSiTipoModificador.getSelectionModel().getSelectedItem().contentEquals("Por Valor")) {
+    				c = new Caracteristica(CriSiNomeCaracteristica.getText(),CriSiReferencia.getSelectionModel().getSelectedItem(),CriSiOperador.getSelectionModel().getSelectedItem(),Double.parseDouble(CriSiModificador.getText()));
+    			}
+    			else {
+    				c = new Caracteristica(CriSiNomeCaracteristica.getText(),CriSiReferencia.getSelectionModel().getSelectedItem(),CriSiCaracteristicaModificadora.getSelectionModel().getSelectedItem(),CriSiOperador.getSelectionModel().getSelectedItem());
+    			}
     			
     		}
     		CriSiTabelaCaracteristicas.getItems().add(c);
 	    	CriSiReferencia.getItems().add(c);
 	    	CriSiTabelaCaracteristicasVerificado.getItems().add(c);
+	    	CriSiCaracteristicaModificadora.getItems().add(c);
     		CriSiNomeCaracteristica.clear();
     		CriSiModificador.clear();
 	    	CriSiValorBase.clear();
@@ -417,6 +441,7 @@ public class GraficoFXMLController implements Initializable {
     	CriSiTabelaCaracteristicas.getItems().remove(c);
     	CriSiReferencia.getItems().remove(c);
     	CriSiTabelaCaracteristicasVerificado.getItems().remove(c);
+    	CriSiCaracteristicaModificadora.getItems().remove(c);
     	CriSiNomeCaracteristica.setText(c.getNome());
     	CriSiValorBase.setText(c.getValor()+"");
     	CriSiValorMinimo.setText(c.getValorminimo()+"");
@@ -428,6 +453,7 @@ public class GraficoFXMLController implements Initializable {
     	CriSiTabelaCaracteristicas.getItems().remove(c);
     	CriSiReferencia.getItems().remove(c);
     	CriSiTabelaCaracteristicasVerificado.getItems().remove(c);
+    	CriSiCaracteristicaModificadora.getItems().remove(c);
     }
     
     //-Verificado-
@@ -472,6 +498,24 @@ public class GraficoFXMLController implements Initializable {
     	}
     	
     	DadosDeBanco.SalvarUnico(s);
+    	SelecionarAbaPorNome("Consultar Sistema");
+    	ConSiSistemasTabela.getItems().add(s);
+    	ConSiSistemasTabela.getSelectionModel().select(s);
+    	
+    	CriSiNomeSistemaVerificado.setText("Nome:");
+    	CriSiVersaoSistemaVerificado.setText("Versao:");
+    	CriSiTabelaCaracteristicasVerificado.getItems().clear();
+    	CriSiTabelaSegmentoVerificado.getItems().clear();
+    	CriSiTabelaRegrasVerificado.getItems().clear();
+    	CriSiTabelaCaracteristicas.getItems().clear();
+    	CriSiReferencia.getItems().clear();
+    	CriSiCaracteristicaModificadora.getItems().clear();
+    	CriSiRegrasCriadas.getItems().clear();
+    	CriSiTabelaSegmento.getItems().clear();
+    	CriSiNomeSistema.clear();
+    	CriSiVersaoSistema.clear();
+    	CriSiDescricaoSistema.setHtmlText("");
+    	
     }
     
     
@@ -521,30 +565,75 @@ public class GraficoFXMLController implements Initializable {
     
     @FXML
     void ConSiEditarSistema(ActionEvent event) {
-
+    	Sistema s = ConSiSistemasTabela.getSelectionModel().getSelectedItem();
+    	DadosDeBanco.Excluir(s);
+    	ConSiSistemasTabela.getItems().remove(s);
+    	SelecionarAbaPorNome("Criar Sistema");
+    	
+    	CriSiNomeSistemaVerificado.setText("Nome:"+s.getNome());
+    	CriSiVersaoSistemaVerificado.setText("Versao:"+s.getVersao());
+    	for(Caracteristica c : s.getCaracteristicas()) {
+    		CriSiTabelaCaracteristicasVerificado.getItems().add(c);
+    		CriSiTabelaCaracteristicas.getItems().add(c);
+    		CriSiReferencia.getItems().add(c);
+    		CriSiCaracteristicaModificadora.getItems().add(c);
+    	}
+    	for(Segmento seg : s.getSegmentos()) {
+    		CriSiTabelaSegmentoVerificado.getItems().add(seg);
+    		CriSiTabelaSegmento.getItems().add(seg);
+    	}
+    	for(Regra r : s.getRegras()) {
+    		CriSiTabelaRegrasVerificado.getItems().add(r);
+    		CriSiRegrasCriadas.getItems().add(r);
+    	}
+    	CriSiNomeSistema.setText(s.getNome());
+    	CriSiVersaoSistema.setText(s.getVersao());
+    	CriSiDescricaoSistema.setHtmlText(s.getDescricao());
     }
     @FXML
     void ConSiRemoverSistema(ActionEvent event) {
-
+    	Sistema s = ConSiSistemasTabela.getSelectionModel().getSelectedItem();
+    	DadosDeBanco.Excluir(s);
+    	ConSiSistemasTabela.getItems().remove(s);
     }
     @FXML
     void ConSiSelecionarRegra(ActionEvent event) {
-    	
+    	try{
+    		ConSiTextoRegrasSistema.getEngine().loadContent(ConSiRegrasSistema.getSelectionModel().getSelectedItem().getRegra());
+    	}
+    	catch(Exception e) {
+    		
+    	}
     }
     @FXML
     void ConSiSelecionarSistema(MouseEvent event) {
     	if(ConSiSistemasTabela.getSelectionModel().getSelectedItem() != s) {
+    		
+    		ConSiNomeSistema.setText("Nome:");
+    		ConSiVersaoSistema.setText("Versao:");
+    		ConSiDescricaoSistema.getEngine().loadContent("");
+    		ConSiCaracteristicasTabela.getItems().clear();
+    		ConSiSegmentoTabela.getItems().clear();
+    		ConSiCaracteristicasReferenciaTabela.getItems().clear();
+    		ConSiRegrasSistema.getItems().clear();
+    		ConSiTextoRegrasSistema.getEngine().loadContent("");
+    		
     		try {
         		s = ConSiSistemasTabela.getSelectionModel().getSelectedItem();
-        		ConSiNomeSistema.setText(s.getNome());
-        		ConSiVersaoSistema.setText(s.getVersao());
+        		ConSiNomeSistema.setText("Nome:"+s.getNome());
+        		ConSiVersaoSistema.setText("Versao:"+s.getVersao());
         		ConSiDescricaoSistema.getEngine().loadContent(s.getDescricao());
         		for(Caracteristica c : s.getCaracteristicas()) {
         			if(c.getOperador().isBlank()) {
         				ConSiCaracteristicasTabela.getItems().add(c);
         			}
         			else {
-        				c.Aparencias();
+        				if(c.isReferenciadoC()) {
+        					c.GerarAparencia(c.getOperador(), c.getCreferencia2());
+        				}
+        				else {
+        					c.GerarAparencia(c.getOperador(), c.getModificador());
+        				}
         				ConSiCaracteristicasReferenciaTabela.getItems().add(c);
         			}
         		}
