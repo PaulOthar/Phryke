@@ -3,26 +3,42 @@ package formatos;
 import java.util.ArrayList;
 
 public class Caracteristica extends Formato {
-	// Algumas Caracteristicas, sao definidas por outros fatores, como no 3d&t, a
-	// vida e definida por 5x a Resistencia
-	// a regra nesse caso vai definir o valor da caracteristica.
-	private String descricao, regra, sistema;
-	private double valor, valorminimo, valormaximo;
+	private String descricao, operador;
+	private Caracteristica referencia;
+	private double valor, valorminimo, valormaximo, modificador;
+	private boolean referenciado = false;
+	
+	public static final String soma = "Soma(+)",subtracao = "Subtracao(-)",multiplicacao = "Multiplicacao(x)",divisao = "Divisao(/)";
 
 	public Caracteristica() {
 		super.setNome(new String());
 		this.setDescricao(new String());
-		this.setRegra(new String());
-		this.setSistema(new String());
 		this.setValor(0);
 		this.DefinirMinMax(0, 0);
+		this.setModificador(0);
+		this.getReferencia().setNome("");
+		this.getReferencia().setValor(0);
+		this.getReferencia().DefinirMinMax(0, 0);
+		this.getReferencia().setModificador(0);
+		this.getReferencia().setReferenciado(false);
+		this.getReferencia().setOperador("");
+		
 	}
 
+	public Caracteristica(String Codigo,boolean x) {
+		this.DeCodigoParaDados(Codigo);
+	}
+	
+	public Caracteristica(String nome, Double v, Double vmin, Double vmax) {
+		super.setNome(nome);
+		this.setDescricao(new String());
+		this.setValor(v);
+		this.DefinirMinMax(vmin, vmax);
+	}
+	
 	public Caracteristica(String nome) {
 		super.setNome(nome);
 		this.setDescricao(new String());
-		this.setRegra(new String());
-		this.setSistema(new String());
 		this.setValor(0);
 		this.DefinirMinMax(0, 0);
 	}
@@ -30,12 +46,20 @@ public class Caracteristica extends Formato {
 	public Caracteristica(String nome, String descricao) {
 		super.setNome(nome);
 		this.setDescricao(descricao);
-		this.setRegra(new String());
-		this.setSistema(new String());
 		this.setValor(0);
 		this.DefinirMinMax(0, 0);
 	}
 
+	public Caracteristica(String nome,Caracteristica referencia,String operador,double modificador) {
+		super.setNome(nome);
+		this.setDescricao(new String());
+		this.setReferencia(referencia);
+		this.setOperador(operador);
+		this.setModificador(modificador);
+		this.DefinirValoresViaRegra(referencia);
+		this.setReferenciado(true);
+	}
+	
 	// Lembrar de implementar
 	public double CalcularCaracteristicaViaRegra(ArrayList<Double> valores) {
 		// Recebe a regra e os Valores, e faz o calculo, inserindo o resultado no valor
@@ -54,20 +78,33 @@ public class Caracteristica extends Formato {
 				this.setDescricao(s);
 				break;
 			case 2:
-				this.setRegra(s);
-				break;
-			case 3:
-				this.setSistema(s);
-				break;
-			case 4:
 				this.setValor(Double.parseDouble(s));
 				break;
-			case 5:
+			case 3:
 				this.setValormaximo(Double.parseDouble(s));
 				break;
-			case 6:
+			case 4:
 				this.setValorminimo(Double.parseDouble(s));
 				break;
+			case 5:
+				this.setModificador(Double.parseDouble(s));
+				break;
+			case 6:
+				this.setOperador("");
+				break;
+			case 7:
+				this.setReferencia(new Caracteristica(s));
+				break;
+			case 8:
+				this.getReferencia().setValor(Double.parseDouble(s));
+				break;
+			case 9:
+				this.getReferencia().setValormaximo(Double.parseDouble(s));
+				break;
+			case 10:
+				this.getReferencia().setValorminimo(Double.parseDouble(s));
+				break;
+				
 			}
 			contador++;
 		}
@@ -76,9 +113,19 @@ public class Caracteristica extends Formato {
 	@Override
 	public String DeDadosParaCodigo() {
 		String codigo;
-		codigo = super.getNome() + primario + this.getDescricao() + primario + this.getRegra() + primario
-				+ this.getSistema() + primario + this.getValor() + primario + this.getValormaximo() + primario
-				+ this.getValorminimo();
+		
+		if(referenciado) {
+			codigo = super.getNome() + primario + this.getDescricao() + primario + this.getValor() + primario
+					+ this.getValormaximo() + primario + this.getValorminimo() + primario
+					+ this.getModificador() + primario + this.getOperador() + primario + this.getReferencia().getNome() + primario
+					+ this.getReferencia().getValor() + primario + this.getReferencia().getValormaximo() + primario + this.getReferencia().getValorminimo();
+		}
+		else {
+			codigo = super.getNome() + primario + this.getDescricao() + primario + this.getValor() + primario
+					+ this.getValormaximo() + primario + this.getValorminimo() + primario
+					+ this.getModificador() + primario + this.getOperador() + primario + "x" + primario
+					+ 0 + primario + 0 + primario + 0;
+		}
 		return codigo;
 	}
 
@@ -86,8 +133,8 @@ public class Caracteristica extends Formato {
 		this.setValorminimo(min);
 		this.setValormaximo(max);
 	}
-
-	// Lembrar de implementar
+	
+	//Lembrar de implementar
 	public void DefinirRegra(String regra) {
 		// Recebe uma equacao, que formata os valores e as operacoes, e sussetivamente
 		// faz o resultado
@@ -106,11 +153,46 @@ public class Caracteristica extends Formato {
 		}
 	}
 
-	// Lembrar de implementar
-	public void DefinirValorViaRegra(ArrayList<Double> valores) {
-
+	public void DefinirValoresViaRegra(Caracteristica c) {
+		switch(this.getOperador()) {
+		case soma:
+			this.setValor(c.getValor()+this.getModificador());
+			this.setValorminimo(c.getValorminimo()+this.getModificador());
+			this.setValormaximo(c.getValormaximo()+this.getModificador());
+			break;
+		case subtracao:
+			this.setValor(c.getValor()-this.getModificador());
+			this.setValorminimo(c.getValorminimo()-this.getModificador());
+			this.setValormaximo(c.getValormaximo()-this.getModificador());
+			break;
+		case divisao:
+			this.setValor(c.getValor()/this.getModificador());
+			this.setValorminimo(c.getValorminimo()/this.getModificador());
+			this.setValormaximo(c.getValormaximo()/this.getModificador());
+			break;
+		case multiplicacao:
+			this.setValor(c.getValor()*this.getModificador());
+			this.setValorminimo(c.getValorminimo()*this.getModificador());
+			this.setValormaximo(c.getValormaximo()*this.getModificador());
+			break;
+		}
 	}
 
+	public double CalcularValorViaRegra(double valordacaracteristica) {
+		switch(this.getOperador()) {
+		case soma:
+			return valordacaracteristica + this.getModificador();
+		case subtracao:
+			return valordacaracteristica - this.getModificador();
+		case divisao:
+			return valordacaracteristica / this.getModificador();
+		case multiplicacao:
+			return valordacaracteristica * this.getModificador();
+		default:
+			return 0;
+		}
+	}
+	
 	@Override
 	public Formato GerarProprioTipo() {
 		return new Caracteristica();
@@ -118,14 +200,6 @@ public class Caracteristica extends Formato {
 
 	public String getDescricao() {
 		return descricao;
-	}
-
-	public String getRegra() {
-		return regra;
-	}
-
-	public String getSistema() {
-		return sistema;
 	}
 
 	public double getValor() {
@@ -140,16 +214,24 @@ public class Caracteristica extends Formato {
 		return valorminimo;
 	}
 
+	public Caracteristica getReferencia() {
+		return referencia;
+	}
+
+	public double getModificador() {
+		return modificador;
+	}
+
+	public String getOperador() {
+		return operador;
+	}
+	
+	public boolean isReferenciado() {
+		return referenciado;
+	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public void setRegra(String regra) {
-		this.regra = regra;
-	}
-
-	public void setSistema(String sistema) {
-		this.sistema = sistema;
 	}
 
 	public void setValor(double valor) {
@@ -162,6 +244,28 @@ public class Caracteristica extends Formato {
 
 	public void setValorminimo(double valorminimo) {
 		this.valorminimo = valorminimo;
+	}
+	
+	public void setReferencia(Caracteristica referencia) {
+		this.referencia = referencia;
+	}
+
+	public void setModificador(double modificador) {
+		this.modificador = modificador;
+	}
+
+	
+	public void setOperador(String operador) {
+		this.operador = operador;
+	}
+
+	public void setReferenciado(boolean referenciado) {
+		this.referenciado = referenciado;
+	}
+
+	@Override
+	public String toString() {
+		return super.getNome();
 	}
 
 }

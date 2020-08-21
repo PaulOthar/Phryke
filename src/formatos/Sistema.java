@@ -7,30 +7,23 @@ public class Sistema extends Formato {
 	// 3d&t tem habilidade....
 	// Caracteristicas: Forca, habilidade...
 	// Segmentos: Vantagens..desvantagens...magias...pericias.......
-	private ArrayList<String> caracteristicas, segmentos, regras;
+	private ArrayList<Formato> caracteristicas, segmentos, regras;
+	private String descricao;
 
 	private String versao;
 
 	public Sistema() {
 		super.setNome(new String());
 		this.setVersao(new String());
-		this.setCaracteristicas(new ArrayList<String>());
-		this.setSegmentos(new ArrayList<String>());
-		this.setRegras(new ArrayList<String>());
-	}
-
-	public void AdicionarCaracteristicaPorCaracteristica(Caracteristica c) {
-		this.getCaracteristicas().add(c.getNome());
-	}
-
-	public void AdicionarRegraPorRegra(Regra r) {
-		regras.add(r.getNome());
+		this.setCaracteristicas(new ArrayList<Formato>());
+		this.setSegmentos(new ArrayList<Formato>());
+		this.setRegras(new ArrayList<Formato>());
 	}
 
 	@Override
 	public void DeCodigoParaDados(String Codigo) {
 		int contador = 0;
-		for (String s : Codigo.split(primario)) {
+		for (String s : Codigo.split(terciario)) {
 			switch (contador) {
 			case 0:
 				this.setVersao(s);
@@ -40,17 +33,17 @@ public class Sistema extends Formato {
 				break;
 			case 2:
 				for (String ss : s.split(secundario)) {
-					this.getCaracteristicas().add(ss);
+					this.getCaracteristicas().add(new Caracteristica(ss,true));
 				}
 				break;
 			case 3:
 				for (String ss : s.split(secundario)) {
-					this.getSegmentos().add(ss);
+					this.getSegmentos().add(new Segmento(ss,true));
 				}
 				break;
 			case 4:
 				for (String ss : s.split(secundario)) {
-					this.getRegras().add(ss);
+					this.getRegras().add(new Regra(ss,true));
 				}
 				break;
 			}
@@ -62,29 +55,29 @@ public class Sistema extends Formato {
 	public String DeDadosParaCodigo() {
 		String codigo = new String(), caracteristicas = new String(), segmentos = new String(), regras = new String();
 
-		for (String s : this.getCaracteristicas()) {
+		for (Formato s : this.getCaracteristicas()) {
 			if (!caracteristicas.isBlank()) {
 				caracteristicas = caracteristicas + secundario;
 			}
-			caracteristicas = caracteristicas + s;
+			caracteristicas = caracteristicas + s.DeDadosParaCodigo();
 		}
 
-		for (String s : this.getSegmentos()) {
+		for (Formato s : this.getSegmentos()) {
 			if (!segmentos.isBlank()) {
 				segmentos = segmentos + secundario;
 			}
-			segmentos = segmentos + s;
+			segmentos = segmentos + s.DeDadosParaCodigo();
 		}
 
-		for (String s : this.getRegras()) {
+		for (Formato s : this.getRegras()) {
 			if (!regras.isBlank()) {
 				regras = regras + secundario;
 			}
-			regras = regras + s;
+			regras = regras + s.DeDadosParaCodigo();
 		}
 
-		codigo = this.getVersao() + primario + super.getNome() + primario + caracteristicas + primario + segmentos
-				+ primario + regras;
+		codigo = this.getVersao() + terciario + super.getNome() + terciario + caracteristicas + terciario + segmentos
+				+ terciario + regras;
 		return codigo;
 	}
 
@@ -94,15 +87,15 @@ public class Sistema extends Formato {
 		return new Sistema();
 	}
 
-	public ArrayList<String> getCaracteristicas() {
+	public ArrayList<Formato> getCaracteristicas() {
 		return caracteristicas;
 	}
 
-	public ArrayList<String> getRegras() {
+	public ArrayList<Formato> getRegras() {
 		return regras;
 	}
 
-	public ArrayList<String> getSegmentos() {
+	public ArrayList<Formato> getSegmentos() {
 		return segmentos;
 	}
 
@@ -110,31 +103,27 @@ public class Sistema extends Formato {
 		return versao;
 	}
 
-	public ArrayList<Caracteristica> PegarCaracteristicas(ArrayList<Caracteristica> ca) {
-		ArrayList<Caracteristica> cagerada = new ArrayList<Caracteristica>();
-		for (Caracteristica c : ca) {
-			for (String s : this.getCaracteristicas()) {
-				if (c.getNome() == s) {
-					cagerada.add(c);
-				}
-			}
-		}
-		return cagerada;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setCaracteristicas(ArrayList<String> caracteristicas) {
+	public void setCaracteristicas(ArrayList<Formato> caracteristicas) {
 		this.caracteristicas = caracteristicas;
 	}
 
-	public void setRegras(ArrayList<String> regras) {
+	public void setRegras(ArrayList<Formato> regras) {
 		this.regras = regras;
 	}
 
-	public void setSegmentos(ArrayList<String> segmentos) {
+	public void setSegmentos(ArrayList<Formato> segmentos) {
 		this.segmentos = segmentos;
 	}
 
 	public void setVersao(String versao) {
 		this.versao = versao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 }

@@ -1,14 +1,21 @@
 package formatos;
 
 public class Regra extends Formato {
-	private String regra, sistema;
+	private String regra;
 
 	public Regra() {
 		super.setNome(new String());
 		this.setRegra(new String());
-		this.setSistema(new String());
+	}
+	public Regra(String nome,String regra) {
+		super.setNome(nome);
+		this.setRegra(regra);
 	}
 
+	public Regra(String Codigo,boolean x) {
+		this.DeCodigoParaDados(Codigo);
+	}
+	
 	@Override
 	public void DeCodigoParaDados(String Codigo) {
 		int Contador = 0;
@@ -20,9 +27,6 @@ public class Regra extends Formato {
 			case 1:
 				this.setRegra(s);
 				break;
-			case 2:
-				this.setSistema(s);
-				break;
 			}
 			Contador++;
 		}
@@ -31,7 +35,7 @@ public class Regra extends Formato {
 	@Override
 	public String DeDadosParaCodigo() {
 		String Codigo = new String();
-		Codigo = super.getNome() + primario + this.getRegra() + primario + this.getSistema();
+		Codigo = super.getNome() + primario + this.getRegra();
 		return Codigo;
 	}
 
@@ -45,16 +49,13 @@ public class Regra extends Formato {
 		return regra;
 	}
 
-	public String getSistema() {
-		return sistema;
-	}
-
 	public void setRegra(String regra) {
 		this.regra = regra;
 	}
-
-	public void setSistema(String sistema) {
-		this.sistema = sistema;
+	@Override
+	public String toString() {
+		return super.getNome();
 	}
+
 
 }

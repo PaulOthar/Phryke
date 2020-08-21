@@ -188,14 +188,14 @@
                      <children>
                         <Accordion nodeOrientation="LEFT_TO_RIGHT" prefHeight="446.0" prefWidth="709.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <panes>
-                            <TitledPane prefHeight="386.0" prefWidth="709.0" text="Basico" wrapText="true">
+                            <TitledPane prefHeight="397.0" prefWidth="709.0" text="Basico" wrapText="true">
                               <content>
                                 <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="303.0" prefWidth="707.0">
                                        <children>
-                                          <TextField fx:id="CriSiNomeSistema" alignment="CENTER" layoutY="28.0" promptText="Nome Do Sistema" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
+                                          <TextField fx:id="CriSiNomeSistema" alignment="CENTER" layoutY="28.0" onAction="#CriSiInserirNomeSistema" promptText="Nome Do Sistema" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
                                           <Label alignment="TOP_LEFT" layoutX="1.0" layoutY="6.0" text="Nome Do Sistema" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
                                           <Label alignment="TOP_LEFT" layoutX="170.0" layoutY="6.0" text="Versão Do Sistema" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="10.0" />
-                                          <TextField fx:id="CriSiVersaoSistema" alignment="CENTER" layoutX="170.0" layoutY="28.0" promptText="Versão Do Sistema" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="25.0" />
+                                          <TextField fx:id="CriSiVersaoSistema" alignment="CENTER" layoutX="170.0" layoutY="28.0" onAction="#CriSiInserirVersaoSistema" promptText="Versão Do Sistema" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="25.0" />
                                           <HTMLEditor fx:id="CriSiDescricaoSistema" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="14.0" layoutY="90.0" prefHeight="237.0" prefWidth="707.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
                                           <Label layoutX="10.0" layoutY="62.0" text="Descrição Do Sistema" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="60.0" />
                                        </children>
@@ -205,50 +205,53 @@
                                     </AnchorPane>
                               </content>
                             </TitledPane>
-                            <TitledPane prefHeight="462.0" prefWidth="709.0" text="Segmentos">
+                            <TitledPane prefHeight="419.0" prefWidth="709.0" text="Segmentos">
                               <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="707.0">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="59.0" prefWidth="707.0">
                                        <children>
-                                          <TableView layoutX="543.0" layoutY="14.0" prefHeight="301.0" prefWidth="150.0" AnchorPane.bottomAnchor="7.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                                          <TableView fx:id="CriSiTabelaSegmento" layoutX="543.0" layoutY="17.0" prefHeight="303.0" prefWidth="250.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
                                             <columns>
                                               <TableColumn fx:id="CriSiSegmento" prefWidth="150.0" text="Segmento" />
+                                                <TableColumn fx:id="CriSiValorAssociadoTabela" prefWidth="100.0" text="Valor Associado" />
                                             </columns>
                                           </TableView>
-                                          <TextField fx:id="CriSiNomeSegmento" layoutX="14.0" layoutY="27.0" prefWidth="150.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="27.0" />
-                                          <Label layoutX="34.0" layoutY="11.0" text="Nome Do Segmento" AnchorPane.leftAnchor="34.0" AnchorPane.topAnchor="11.0" />
-                                          <Button layoutX="14.0" layoutY="62.0" mnemonicParsing="false" onAction="#CriSiCriarSegmento" prefHeight="25.0" prefWidth="75.0" text="Criar" AnchorPane.leftAnchor="14.0" />
-                                          <Button layoutX="89.0" layoutY="62.0" mnemonicParsing="false" onAction="#CriSiRemoverSegmento" prefHeight="25.0" prefWidth="75.0" text="Remover" AnchorPane.leftAnchor="89.0" />
-                                          <Button layoutX="14.0" layoutY="87.0" mnemonicParsing="false" onAction="#CriSiEditarSegmento" prefWidth="150.0" text="Editar" AnchorPane.leftAnchor="14.0" />
+                                          <TextField fx:id="CriSiNomeSegmento" layoutX="14.0" layoutY="27.0" prefWidth="150.0" promptText="Nome Do Segmento" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
+                                          <Label layoutX="15.0" layoutY="14.0" text="Nome Do Segmento" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                          <Button layoutX="14.0" layoutY="262.0" mnemonicParsing="false" onAction="#CriSiCriarSegmento" prefHeight="25.0" prefWidth="75.0" text="Criar" AnchorPane.leftAnchor="14.0" />
+                                          <Button layoutX="89.0" layoutY="262.0" mnemonicParsing="false" onAction="#CriSiRemoverSegmento" prefHeight="25.0" prefWidth="75.0" text="Remover" AnchorPane.leftAnchor="89.0" />
+                                          <Button layoutX="14.0" layoutY="287.0" mnemonicParsing="false" onAction="#CriSiEditarSegmento" prefWidth="150.0" text="Editar" AnchorPane.leftAnchor="14.0" />
+                                          <TextField fx:id="CriSiValorAssociado" layoutX="15.0" layoutY="87.0" promptText="Valor Associado" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="85.0" />
+                                          <Label layoutX="14.0" layoutY="70.0" text="Valor Associado" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="70.0" />
                                        </children>
                                        <padding>
                                           <Insets top="1.0" />
                                        </padding></AnchorPane>
                               </content>
                             </TitledPane>
-                              <TitledPane prefHeight="403.0" prefWidth="709.0" text="Regras">
+                              <TitledPane prefHeight="465.0" prefWidth="709.0" text="Regras">
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="65.0" prefWidth="707.0">
                                        <children>
                                           <TextField fx:id="CriSiNomeRegra" layoutX="14.0" layoutY="28.0" prefWidth="150.0" promptText="Nome Da Regra" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="25.0" />
                                           <Label layoutX="10.0" layoutY="6.0" text="Nome Da Regra" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="6.0" />
-                                          <HTMLEditor fx:id="CriSiDescricaoRegra" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="10.0" layoutY="116.0" prefHeight="200.0" prefWidth="688.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0" />
+                                          <HTMLEditor fx:id="CriSiDescricaoRegra" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="10.0" layoutY="116.0" prefHeight="200.0" prefWidth="688.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="80.0" />
                                           <ComboBox fx:id="CriSiRegrasCriadas" layoutX="204.0" layoutY="26.0" onAction="#CriSiSelecionarRegra" prefWidth="150.0" promptText="Regras" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="25.0" />
                                           <Label layoutX="200.0" layoutY="7.0" text="Regras Criadas" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="10.0" />
-                                          <Label layoutX="10.0" layoutY="99.0" text="Descrição Da Regra" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="100.0" />
-                                          <Button layoutX="11.0" layoutY="62.0" mnemonicParsing="false" onAction="#CriSiCriarRegra" prefHeight="25.0" prefWidth="150.0" text="Criar Regra" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="61.0" />
-                                          <Button layoutX="200.0" layoutY="61.0" mnemonicParsing="false" onAction="#CriSiRemoverRegra" prefWidth="75.0" text="Remover" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="60.0" />
-                                          <Button layoutX="275.0" layoutY="61.0" mnemonicParsing="false" onAction="#CriSiEditarRegra" prefWidth="75.0" text="Editar" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="60.0" />
+                                          <Label layoutX="14.0" layoutY="70.0" text="Descrição Da Regra" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="65.0" />
+                                          <Button layoutX="354.0" layoutY="27.0" mnemonicParsing="false" onAction="#CriSiCriarRegra" prefHeight="25.0" prefWidth="150.0" text="Criar Regra" AnchorPane.leftAnchor="355.0" AnchorPane.topAnchor="25.0" />
+                                          <Button layoutX="509.0" layoutY="26.0" mnemonicParsing="false" onAction="#CriSiRemoverRegra" prefWidth="75.0" text="Remover" AnchorPane.leftAnchor="509.0" AnchorPane.topAnchor="25.0" />
+                                          <Button layoutX="584.0" layoutY="26.0" mnemonicParsing="false" onAction="#CriSiEditarRegra" prefWidth="75.0" text="Editar" AnchorPane.leftAnchor="584.0" AnchorPane.topAnchor="25.0" />
                                        </children>
                                        <padding>
                                           <Insets top="1.0" />
                                        </padding></AnchorPane>
                                 </content>
                               </TitledPane>
-                            <TitledPane prefHeight="395.0" prefWidth="709.0" text="Características">
+                            <TitledPane prefHeight="476.0" prefWidth="709.0" text="Características">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="64.0" prefWidth="707.0">
                                        <children>
-                                          <TableView layoutX="493.0" layoutY="14.0" prefHeight="306.0" prefWidth="370.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                          <TableView fx:id="CriSiTabelaCaracteristicas" layoutX="493.0" layoutY="14.0" prefHeight="306.0" prefWidth="370.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                             <columns>
                                               <TableColumn fx:id="CriSiNomeCaracteristicaTabela" prefWidth="100.0" text="Característica" />
                                               <TableColumn fx:id="CriSiValorBaseTabela" prefWidth="90.0" text="Valor Base" />
@@ -281,12 +284,12 @@
                                        </padding></AnchorPane>
                               </content>
                             </TitledPane>
-                              <TitledPane prefHeight="397.0" prefWidth="709.0" text="Verificação">
+                              <TitledPane prefHeight="623.0" prefWidth="709.0" text="Verificação">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="707.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="77.0" prefWidth="707.0">
                                        <children>
                                           <Button layoutX="607.0" layoutY="10.0" mnemonicParsing="false" onAction="#CriSiCriarSistema" text="Criar Sistema" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                                          <TableView layoutX="14.0" layoutY="49.0" prefHeight="270.0" prefWidth="400.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
+                                          <TableView fx:id="CriSiTabelaCaracteristicasVerificado" layoutX="14.0" layoutY="49.0" prefHeight="270.0" prefWidth="400.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
                                             <columns>
                                               <TableColumn fx:id="CriSiNomeCaracteristicaVerificado" editable="false" prefWidth="130.0" text="Características" />
                                               <TableColumn fx:id="CriSiValorBaseVerificado" editable="false" prefWidth="90.0" text="Valor Base" />
@@ -296,12 +299,12 @@
                                           </TableView>
                                           <Label fx:id="CriSiNomeSistemaVerificado" layoutX="14.0" layoutY="14.0" text="Nome:" />
                                           <Label fx:id="CriSiVersaoSistemaVerificado" layoutX="193.0" layoutY="14.0" text="Versão:" />
-                                          <TableView layoutX="410.0" layoutY="48.0" prefHeight="270.0" prefWidth="120.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="50.0">
+                                          <TableView fx:id="CriSiTabelaSegmentoVerificado" layoutX="410.0" layoutY="48.0" prefHeight="270.0" prefWidth="120.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="50.0">
                                             <columns>
                                               <TableColumn fx:id="CriSiSegmentosVerificado" editable="false" prefWidth="120.0" text="Segmentos" />
                                             </columns>
                                           </TableView>
-                                          <TableView layoutX="530.0" layoutY="53.0" prefHeight="264.0" prefWidth="167.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="530.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+                                          <TableView fx:id="CriSiTabelaRegrasVerificado" layoutX="530.0" layoutY="53.0" prefHeight="264.0" prefWidth="167.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="530.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
                                             <columns>
                                               <TableColumn fx:id="CriSiRegrasVerificado" editable="false" prefWidth="167.0" text="Regras" />
                                             </columns>

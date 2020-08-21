@@ -15,12 +15,16 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import recursosLogicos.DadosDeBanco;
 import recursosLogicos.MeuNomeEhDado;
+import formatos.*;
 
 public class GraficoFXMLController implements Initializable {
 	//---Inicializador---
@@ -32,6 +36,26 @@ public class GraficoFXMLController implements Initializable {
 			abasefetivas.add(t);
 		}
 		abas.getTabs().clear();
+		CriSiOperador.getItems().add(Caracteristica.soma);
+		CriSiOperador.getItems().add(Caracteristica.subtracao);
+		CriSiOperador.getItems().add(Caracteristica.divisao);
+		CriSiOperador.getItems().add(Caracteristica.multiplicacao);
+		CriSiOperador.getSelectionModel().select(0);
+		CriSiParametro.getItems().add("Por Valor");
+		CriSiParametro.getItems().add("Por Referencia");
+		CriSiParametro.getSelectionModel().select(0);
+		CriSiSegmento.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+		CriSiValorAssociadoTabela.setCellValueFactory(new PropertyValueFactory<>("ValorAssociado"));
+		CriSiSegmentosVerificado.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+		CriSiRegrasVerificado.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+		CriSiNomeCaracteristicaTabela.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+		CriSiValorBaseTabela.setCellValueFactory(new PropertyValueFactory<>("valor"));
+		CriSiValorMinimoTabela.setCellValueFactory(new PropertyValueFactory<>("valorminimo"));
+		CriSiValorMaximoTabela.setCellValueFactory(new PropertyValueFactory<>("valormaximo"));
+		CriSiNomeCaracteristicaVerificado.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+		CriSiValorBaseVerificado.setCellValueFactory(new PropertyValueFactory<>("valor"));
+		CriSiValorMinimoVerificado.setCellValueFactory(new PropertyValueFactory<>("valorminimo"));
+		CriSiValorMaximoVerificado.setCellValueFactory(new PropertyValueFactory<>("valormaximo"));
 	}
 	
 	
@@ -224,39 +248,116 @@ public class GraficoFXMLController implements Initializable {
 	
 	//---Criar Sistema(CriSi)---
 
-	
+	//-Basico-
 	@FXML
     private TextField CriSiNomeSistema;
     @FXML
     private TextField CriSiVersaoSistema;
     @FXML
     private HTMLEditor CriSiDescricaoSistema;
+    
     @FXML
-    private TableColumn<?, ?> CriSiSegmento;
+    void CriSiInserirVersaoSistema(ActionEvent event) {
+    	CriSiVersaoSistemaVerificado.setText("Versão: "+CriSiVersaoSistema.getText());
+    }
+    @FXML
+    void CriSiInserirNomeSistema(ActionEvent event) {
+    	CriSiNomeSistemaVerificado.setText("Nome: "+CriSiNomeSistema.getText());
+    }
+    
+    //-Segmento-
+    @FXML
+    private TableColumn<String, String> CriSiSegmento;
     @FXML
     private TextField CriSiNomeSegmento;
+    @FXML
+    private TextField CriSiValorAssociado;
+    @FXML
+    private TableView<Segmento> CriSiTabelaSegmento;
+    @FXML
+    private TableColumn<String, String> CriSiValorAssociadoTabela;
+    
+    @FXML
+    void CriSiCriarSegmento(ActionEvent event) {
+    	
+    	if(!CriSiNomeSegmento.getText().isBlank() && !CriSiValorAssociado.getText().isBlank()) {
+    		Segmento seg = new Segmento(CriSiNomeSegmento.getText(),CriSiValorAssociado.getText());
+    		CriSiTabelaSegmento.getItems().add(seg);
+    		CriSiTabelaSegmentoVerificado.getItems().add(seg);
+    		CriSiNomeSegmento.setText("");
+    		CriSiValorAssociado.setText("");
+    		
+    	}
+    }
+    @FXML
+    void CriSiEditarSegmento(ActionEvent event) {
+    	Segmento seg = CriSiTabelaSegmento.getSelectionModel().getSelectedItem();
+    	CriSiNomeSegmento.setText(seg.getNome());
+    	CriSiValorAssociado.setText(seg.getValorAssociado());
+    	CriSiTabelaSegmento.getItems().remove(seg);
+    	CriSiTabelaSegmentoVerificado.getItems().remove(seg);
+    }
+    @FXML
+    void CriSiRemoverSegmento(ActionEvent event) {
+    	Segmento seg = CriSiTabelaSegmento.getSelectionModel().getSelectedItem();
+    	CriSiTabelaSegmento.getItems().remove(seg);
+    	CriSiTabelaSegmentoVerificado.getItems().remove(seg);
+    }
+    
+    //-Regra-
     @FXML
     private TextField CriSiNomeRegra;
     @FXML
     private HTMLEditor CriSiDescricaoRegra;
     @FXML
-    private ComboBox<?> CriSiRegrasCriadas;
+    private ComboBox<Regra> CriSiRegrasCriadas;
+    
     @FXML
-    private TableColumn<?, ?> CriSiNomeCaracteristicaTabela;
+    void CriSiCriarRegra(ActionEvent event) {
+    	if(!CriSiNomeRegra.getText().isBlank() && !CriSiDescricaoRegra.getHtmlText().isBlank()) {
+    		Regra r = new Regra(CriSiNomeRegra.getText(),CriSiDescricaoRegra.getHtmlText());
+        	CriSiRegrasCriadas.getItems().add(r);
+        	CriSiTabelaRegrasVerificado.getItems().add(r);
+        	CriSiNomeRegra.setText("");;
+        	CriSiDescricaoRegra.setHtmlText("");
+    	}
+    }
     @FXML
-    private TableColumn<?, ?> CriSiValorBaseTabela;
+    void CriSiEditarRegra(ActionEvent event) {
+    	Regra r = CriSiRegrasCriadas.getSelectionModel().getSelectedItem();
+    	CriSiRegrasCriadas.getItems().remove(r);
+    	CriSiTabelaRegrasVerificado.getItems().remove(r);
+    	CriSiNomeRegra.setText(r.getNome());
+    	CriSiDescricaoRegra.setHtmlText(r.getRegra());
+    }
     @FXML
-    private TableColumn<?, ?> CriSiValorMinimoTabela;
+    void CriSiRemoverRegra(ActionEvent event) {
+    	Regra r = CriSiRegrasCriadas.getSelectionModel().getSelectedItem();
+    	CriSiRegrasCriadas.getItems().remove(r);
+    	CriSiTabelaRegrasVerificado.getItems().remove(r);
+    }
     @FXML
-    private TableColumn<?, ?> CriSiValorMaximoTabela;
+    void CriSiSelecionarRegra(ActionEvent event) {
+
+    }
+    
+    //-Caracteristica-
+    @FXML
+    private TableColumn<String,String> CriSiNomeCaracteristicaTabela;
+    @FXML
+    private TableColumn<String,String> CriSiValorBaseTabela;
+    @FXML
+    private TableColumn<String,String> CriSiValorMinimoTabela;
+    @FXML
+    private TableColumn<String,String> CriSiValorMaximoTabela;
     @FXML
     private TextField CriSiNomeCaracteristica;
     @FXML
-    private ComboBox<?> CriSiParametro;
+    private ComboBox<String> CriSiParametro;
     @FXML
-    private ChoiceBox<?> CriSiReferencia;
+    private ChoiceBox<Caracteristica> CriSiReferencia;
     @FXML
-    private ChoiceBox<?> CriSiOperador;
+    private ChoiceBox<String> CriSiOperador;
     @FXML
     private TextField CriSiModificador;
     @FXML
@@ -266,70 +367,101 @@ public class GraficoFXMLController implements Initializable {
     @FXML
     private TextField CriSiValorMaximo;
     @FXML
-    private TableColumn<?, ?> CriSiNomeCaracteristicaVerificado;
+    private TableView<Caracteristica> CriSiTabelaCaracteristicas;
+    
     @FXML
-    private TableColumn<?, ?> CriSiValorBaseVerificado;
+    void CriSiCriarCaracteristica(ActionEvent event) {
+    	
+    	try {
+    		Caracteristica c;
+    		if(CriSiParametro.getSelectionModel().getSelectedItem().contentEquals("Por Valor")) {
+    			c = new Caracteristica(CriSiNomeCaracteristica.getText(),Double.parseDouble(CriSiValorBase.getText()),Double.parseDouble(CriSiValorMinimo.getText()),Double.parseDouble(CriSiValorMaximo.getText()));
+    	    	
+    		}
+    		else {
+    			c = new Caracteristica(CriSiNomeCaracteristica.getText(),CriSiReferencia.getSelectionModel().getSelectedItem(),CriSiOperador.getSelectionModel().getSelectedItem(),Double.parseDouble(CriSiModificador.getText()));
+    			
+    		}
+    		CriSiTabelaCaracteristicas.getItems().add(c);
+	    	CriSiReferencia.getItems().add(c);
+	    	CriSiTabelaCaracteristicasVerificado.getItems().add(c);
+    		CriSiNomeCaracteristica.clear();
+    		CriSiModificador.clear();
+	    	CriSiValorBase.clear();
+	    	CriSiValorMinimo.clear();
+	    	CriSiValorMaximo.clear();
+    	}
+    	catch(Exception e) {
+    		
+    	}
+    }
     @FXML
-    private TableColumn<?, ?> CriSiValorMinimoVerificado;
+    void CriSiEditarCaracteristica(ActionEvent event) {
+    	Caracteristica c = CriSiTabelaCaracteristicas.getSelectionModel().getSelectedItem();
+    	CriSiTabelaCaracteristicas.getItems().remove(c);
+    	CriSiReferencia.getItems().remove(c);
+    	CriSiTabelaCaracteristicasVerificado.getItems().remove(c);
+    	CriSiNomeCaracteristica.setText(c.getNome());
+    	CriSiValorBase.setText(c.getValor()+"");
+    	CriSiValorMinimo.setText(c.getValorminimo()+"");
+    	CriSiValorMaximo.setText(c.getValormaximo()+"");
+    }
     @FXML
-    private TableColumn<?, ?> CriSiValorMaximoVerificado;
+    void CriSiRemoverCaracteristica(ActionEvent event) {
+    	Caracteristica c = CriSiTabelaCaracteristicas.getSelectionModel().getSelectedItem();
+    	CriSiTabelaCaracteristicas.getItems().remove(c);
+    	CriSiReferencia.getItems().remove(c);
+    	CriSiTabelaCaracteristicasVerificado.getItems().remove(c);
+    }
+    
+    //-Verificado-
+    
+    @FXML
+    private TableColumn<String, String> CriSiNomeCaracteristicaVerificado;
+    @FXML
+    private TableColumn<String,String> CriSiValorBaseVerificado;
+    @FXML
+    private TableColumn<String,String> CriSiValorMinimoVerificado;
+    @FXML
+    private TableColumn<String,String> CriSiValorMaximoVerificado;
     @FXML
     private Label CriSiNomeSistemaVerificado;
     @FXML
     private Label CriSiVersaoSistemaVerificado;
     @FXML
-    private TableColumn<?, ?> CriSiSegmentosVerificado;
+    private TableColumn<String, String> CriSiSegmentosVerificado;
     @FXML
-    private TableColumn<?, ?> CriSiRegrasVerificado;
-
+    private TableView<Caracteristica> CriSiTabelaCaracteristicasVerificado;
     @FXML
-    void CriSiCriarCaracteristica(ActionEvent event) {
-
-    }
+    private TableView<Segmento> CriSiTabelaSegmentoVerificado;
     @FXML
-    void CriSiCriarRegra(ActionEvent event) {
-
-    }
+    private TableView<Regra> CriSiTabelaRegrasVerificado;
     @FXML
-    void CriSiCriarSegmento(ActionEvent event) {
-
-    }
+    private TableColumn<String, String> CriSiRegrasVerificado;
+    
     @FXML
     void CriSiCriarSistema(ActionEvent event) {
-
-    }
-    @FXML
-    void CriSiEditarCaracteristica(ActionEvent event) {
-
-    }
-    @FXML
-    void CriSiEditarRegra(ActionEvent event) {
-
-    }
-    @FXML
-    void CriSiEditarSegmento(ActionEvent event) {
-
-    }
-    @FXML
-    void CriSiRemoverCaracteristica(ActionEvent event) {
-
-    }
-    @FXML
-    void CriSiRemoverRegra(ActionEvent event) {
-
-    }
-    @FXML
-    void CriSiRemoverSegmento(ActionEvent event) {
-
-    }
-    @FXML
-    void CriSiSelecionarRegra(ActionEvent event) {
-
+    	Sistema s = new Sistema();
+    	s.setNome(CriSiNomeSistema.getText());
+    	s.setVersao(CriSiVersaoSistema.getText());
+    	s.setDescricao(CriSiDescricaoSistema.getHtmlText());
+    	for(Segmento seg : CriSiTabelaSegmento.getItems()) {
+    		s.getSegmentos().add(seg);
+    	}
+    	for(Caracteristica c : CriSiTabelaCaracteristicas.getItems()) {
+    		s.getCaracteristicas().add(c);
+    	}
+    	for(Regra r : CriSiRegrasCriadas.getItems()) {
+    		s.getRegras().add(r);
+    	}
+    	
+    	DadosDeBanco.SalvarUnico(s);
     }
     
-	
+    
 	//--- ---
-    
-    
-    
+
+        
+        
+
 }
