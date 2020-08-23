@@ -1,6 +1,10 @@
-package formatos;
-
+package formatosVelhos;
+/*
 import java.util.ArrayList;
+
+import formatos.Caracteristica;
+import formatos.Formato;
+import formatos.Sistema;
 
 public class Raca extends Formato {
 	// Racas Podem Dar Bonus em certas caracteristicas, e como nao sabemos quais
@@ -23,7 +27,6 @@ public class Raca extends Formato {
 	 * 
 	 * Vantagens / Voar / Membros elasticos Desvantagens / Cego / Surdo Aptidoes /
 	 * Magia Branca / Clonagem
-	 */
 	private ArrayList<ArrayList<String>> peculiaridades;
 
 	public Raca() {
@@ -336,7 +339,6 @@ public class Raca extends Formato {
 	 * !s.contentEquals("null") || !s.contentEquals(null)) { reajuste.add(s); } }
 	 * this.getPeculiaridades().get(i).clear(); for(String s : reajuste) {
 	 * this.getPeculiaridades().get(i).add(s); } return; } } } } }
-	 */
 	public void RemoverPeculiaridadeNoSegmento(String nomesegmento, String nomepeculiaridade) {
 		for (int i = 0; i < this.getPeculiaridades().size(); i++) {
 			if (this.getPeculiaridades().get(i).get(0).equals(nomesegmento)) {
@@ -398,5 +400,5 @@ public class Raca extends Formato {
 			}
 		}
 	}
-
 }
+*/

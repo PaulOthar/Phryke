@@ -31,7 +31,6 @@ import formatos.*;
 public class GraficoFXMLController implements Initializable {
 	//---Inicializador---
 	
-	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		for (Tab t : abas.getTabs()) {
@@ -651,15 +650,185 @@ public class GraficoFXMLController implements Initializable {
     	
     }
 
+    //---Criar Super Peculiaridade(CriSuPe)--------
     
+    public void InicializarCriSuPe() {
+    	
+    }
     
+    //-Basico(B)-
     
+    @FXML
+    private ComboBox<?> CriSuPeBINS;
+    @FXML
+    private ComboBox<?> CriSuPeBINSeg;
+    @FXML
+    private TextField CriSuPeBN;
+    @FXML
+    private TextField CriSuPeBVA;
+    @FXML
+    private HTMLEditor CriSuPeBD;
     
+    @FXML
+    void CriSuPeBINS(ActionEvent event) {
+
+    }
     
+    //-Modificador De Característica(MDC)-
     
+    @FXML
+    private TableView<?> CriSuPeMDCT;
+    @FXML
+    private TableColumn<String,String> CriSuPeMDCCT;
+    @FXML
+    private TableColumn<String,String> CriSuPeMDCMT;
+    @FXML
+    private ComboBox<?> CriSuPeMDCTDP;
+    @FXML
+    private ComboBox<?> CriSuPeMDCCE;
+    @FXML
+    private TextField CriSuPeMDCM;
+    @FXML
+    private TextField CriSuPeMDCNC;
     
+    @FXML
+    void CriSuPeMDCE(ActionEvent event) {
+
+    }
+    @FXML
+    void CriSuPeMDCI(ActionEvent event) {
+
+    }
+    @FXML
+    void CriSuPeMDCR(ActionEvent event) {
+
+    }
     
+    //-Peculiaridades Inerentes Únicas(PIU)-
     
+    @FXML
+    private TextField CriSuPePIUBN;
+    @FXML
+    private TextField CriSuPePIUBVA;
+    @FXML
+    private ComboBox<?> CriSuPePIUBS;
+    @FXML
+    private HTMLEditor CriSuPePIUBD;
+    @FXML
+    private TableView<?> CriSuPePIUMT;
+    @FXML
+    private TableColumn<String,String> CriSuPePIUMCT;
+    @FXML
+    private TableColumn<String,String> CriSuPePIUMMT;
+    @FXML
+    private ComboBox<?> CriSuPePIUMTDP;
+    @FXML
+    private ComboBox<?> CriSuPePIUMCE;
+    @FXML
+    private TextField CriSuPePIUMNC;
+    @FXML
+    private TextField CriSuPePIUMM;
+    @FXML
+    private TableView<?> CriSuPePIUVT;
+    @FXML
+    private TableColumn<String,String> CriSuPePIUVCT;
+    @FXML
+    private TableColumn<String,String> CriSuPePIUVM;
+    @FXML
+    private WebView CriSuPePIUVD;
+    @FXML
+    private Label CriSuPePIUVN;
+    @FXML
+    private Label CriSuPePIUVVA;
+    @FXML
+    private Label CriSuPePIUVS;
+
+    @FXML
+    void CriSuPePIUBS(ActionEvent event) {
+
+    }
+    @FXML
+    void CriSuPePIUME(ActionEvent event) {
+
+    }
+    @FXML
+    void CriSuPePIUMI(ActionEvent event) {
+
+    }
+    @FXML
+    void CriSuPePIUMR(ActionEvent event) {
+
+    }
+    @FXML
+    void CriSuPePIUVCPU(ActionEvent event) {
+
+    }
     
+    //-Peculiaridades Inerentes(PI)-
     
+    @FXML
+    private TableView<?> CriSuPePITP;
+    @FXML
+    private TableColumn<String,String> CriSuPePIPT;
+    @FXML
+    private ComboBox<?> CriSuPePIP;
+    @FXML
+    private ComboBox<?> CriSuPePIS;
+    @FXML
+    private ComboBox<?> CriSuPePITDP;
+    @FXML
+    private ComboBox<?> CriSuPePIPU;
+    @FXML
+    private TableView<?> CriSuPePITC;
+    @FXML
+    private TableColumn<String,String> CriSuPePICT;
+    @FXML
+    private TableColumn<String,String> CriSuPePIMT;
+    
+    @FXML
+    void CriSuPePIEP(ActionEvent event) {
+
+    }
+    @FXML
+    void CriSuPePIEPU(ActionEvent event) {
+
+    }
+    @FXML
+    void CriSuPePIExPU(ActionEvent event) {
+
+    }
+    @FXML
+    void CriSuPePIIP(ActionEvent event) {
+
+    }
+    @FXML
+    void CriSuPePIRP(ActionEvent event) {
+
+    }
+    //-Verificacao(V)-
+    
+    @FXML
+    private Label CriSuPeVN;
+    @FXML
+    private Label CriSuPeVVA;
+    @FXML
+    private TableView<?> CriSuPeVTC;
+    @FXML
+    private TableColumn<String,String> CriSuPeVCT;
+    @FXML
+    private TableColumn<String,String> CriSuPeVMT;
+    @FXML
+    private TableView<?> CriSuPeVTP;
+    @FXML
+    private TableColumn<String,String> CriSuPeVPT;
+    @FXML
+    private WebView CriSuPeVD;
+
+    @FXML
+    void CriSuPeVCSP(ActionEvent event) {
+
+    }
+    
+
+    //----------
 }

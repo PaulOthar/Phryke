@@ -3,22 +3,10 @@ package recursosLogicos;
 import java.util.ArrayList;
 
 import ferramentas.ManipuladorDeArquivo;
-import formatos.Caracteristica;
 import formatos.Formato;
-import formatos.Peculiaridade;
-import formatos.Raca;
-import formatos.Regra;
-import formatos.Sistema;
-import formatos.SuperRaca;
 
 public class DadosDeBanco {
-	public static ArrayList<Caracteristica> Caracteristicas = new ArrayList<Caracteristica>();
 	public static String pasta = "DadosDeBanco";
-	public static ArrayList<Peculiaridade> Peculiaridades = new ArrayList<Peculiaridade>();
-	public static ArrayList<Raca> Racas = new ArrayList<Raca>();
-	public static ArrayList<Regra> Regras = new ArrayList<Regra>();
-	public static ArrayList<Sistema> Sistemas = new ArrayList<Sistema>();
-	public static ArrayList<SuperRaca> SuperRacas = new ArrayList<SuperRaca>();
 
 	public static ArrayList<Formato> Carregar(Formato tipo) {
 		ArrayList<Formato> formatos = new ArrayList<Formato>();
