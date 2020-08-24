@@ -131,4 +131,11 @@ public class Sistema extends Formato {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	@Override
+	public String toString() {
+		return super.getNome();
+	}
+	
+	
 }

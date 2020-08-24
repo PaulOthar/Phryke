@@ -10,8 +10,6 @@ public class InterfaceGrafica extends Application {
 	public static void Rodar(String[] args) {
 		launch(args);
 	}
-
-	
 	@Override
 	public void start(Stage palco) throws Exception {
 		Parent raiz = FXMLLoader.load(getClass().getResource("GraficoFXML.fxml"));

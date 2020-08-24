@@ -31,6 +31,11 @@ public class Caracteristica extends Formato {
 		this.DeCodigoParaDados(codigo);
 	}
 	
+	public Caracteristica(String nome,double modificador) {
+		this(nome);
+		this.setModificador(modificador);
+	}
+	
 	public Caracteristica(String nome, double valor, double valorminimo, double valormaximo) {
 		this(nome);
 		this.setValor(valor);

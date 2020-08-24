@@ -52,4 +52,11 @@ public class Segmento extends Formato {
 		return new Segmento();
 	}
 
+	
+	@Override
+	public String toString() {
+		return super.getNome();
+	}
+
+	
 }
