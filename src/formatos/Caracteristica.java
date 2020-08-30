@@ -28,6 +28,7 @@ public class Caracteristica extends Formato {
 	}
 
 	public Caracteristica(String codigo,boolean chave) {
+		this();
 		this.DeCodigoParaDados(codigo);
 	}
 	

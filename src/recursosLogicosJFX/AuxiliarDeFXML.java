@@ -1,7 +1,5 @@
 package recursosLogicosJFX;
 
-import java.io.IOException;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 

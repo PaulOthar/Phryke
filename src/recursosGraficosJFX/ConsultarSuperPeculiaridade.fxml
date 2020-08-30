@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="452.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recursosLogicosJFX.ConsultarSuperPeculiaridadeController">
+   <children>
+      <TableView layoutX="14.0" layoutY="14.0" prefHeight="327.0" prefWidth="200.0" AnchorPane.bottomAnchor="115.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <columns>
+          <TableColumn prefWidth="100.0" text="S.Peculiaridade" />
+          <TableColumn prefWidth="100.0" text="Valor Associado" />
+        </columns>
+      </TableView>
+      <ComboBox layoutX="11.0" layoutY="405.0" prefWidth="200.0" promptText="Sistema" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
+      <ComboBox layoutX="10.0" layoutY="392.0" prefWidth="200.0" promptText="Segmento" AnchorPane.bottomAnchor="45.0" />
+      <TextField layoutX="236.0" layoutY="116.0" prefWidth="200.0" promptText="Insira O Nome" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0" />
+   </children>
+</AnchorPane>

@@ -22,6 +22,10 @@ public class Sistema extends Formato {
 		this.setRegras(new ArrayList<Regra>());
 	}
 
+	public Sistema(String Codigo) {
+		DeCodigoParaDados(Codigo);
+	}
+	
 	@Override
 	public void DeCodigoParaDados(String Codigo) {
 		int contador = 0;
@@ -54,6 +58,43 @@ public class Sistema extends Formato {
 			}
 			contador++;
 		}
+	}
+	
+	public ArrayList<String> DescreverCodigo(){
+		ArrayList<String> sss = new ArrayList<String>();
+		
+		int contador = 0;
+		for (String s : DeDadosParaCodigo().split(terciario)) {
+			switch (contador) {
+			case 0:
+				sss.add(s);
+				break;
+			case 1:
+				sss.add(s);
+				break;
+			case 2:
+				sss.add(s);
+				break;
+			case 3:
+				for (String ss : s.split(secundario)) {
+					sss.add(ss);
+				}
+				break;
+			case 4:
+				for (String ss : s.split(secundario)) {
+					sss.add(ss);
+				}
+				break;
+			case 5:
+				for (String ss : s.split(secundario)) {
+					sss.add(ss);
+				}
+				break;
+			}
+			contador++;
+		}
+		
+		return sss;
 	}
 
 	@Override
@@ -137,5 +178,7 @@ public class Sistema extends Formato {
 		return super.getNome();
 	}
 	
-	
+	public static Sistema FormatoSistema(Formato f) {
+		return (Sistema) f;
+	}
 }

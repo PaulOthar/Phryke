@@ -28,19 +28,28 @@ public class GraficoFXMLController implements Initializable {
 	@FXML
     private AnchorPane CriarSuperPeculiaridade;
 	@FXML
+    private AnchorPane ConsultarSuperPeculiaridade;
+	@FXML
 	private TabPane abas;
-	private ArrayList<Tab> abasefetivas = new ArrayList<Tab>();
+	public static TabPane abasauxiliares;
+	public static ArrayList<Tab> abasefetivas = new ArrayList<Tab>();
+	
+	public void InicializarAbas() {
+		for (Tab t : abas.getTabs()) {
+			abasefetivas.add(t);
+		}
+		abasauxiliares = abas;
+		abas.getTabs().clear();
+	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		CriarSistema.getChildren().setAll(fxml.PegarFXMLPorNome("CriarSistema"));
 		ConsultarSistema.getChildren().setAll(fxml.PegarFXMLPorNome("ConsultarSistema"));
 		CriarSuperPeculiaridade.getChildren().setAll(fxml.PegarFXMLPorNome("CriarSuperPeculiaridade"));
+		ConsultarSuperPeculiaridade.getChildren().setAll(fxml.PegarFXMLPorNome("ConsultarSuperPeculiaridade"));
 		
-		for (Tab t : abas.getTabs()) {
-			abasefetivas.add(t);
-		}
-		abas.getTabs().clear();
+		InicializarAbas();
 	}
 	
 	
@@ -145,13 +154,13 @@ public class GraficoFXMLController implements Initializable {
 		System.out.println(abas.getTabs());
 	}
 	
-	public void AbrirAbaPorNome(String NomeDaAba) {
+	public static void AbrirAbaPorNome(String NomeDaAba) {
 		Tab t = PegarAbaPorNome(NomeDaAba);
-		if (!abas.getTabs().contains(t)) {
-			abas.getTabs().add(t);
+		if (!abasauxiliares.getTabs().contains(t)) {
+			abasauxiliares.getTabs().add(t);
 		}
 	}
-	public Tab PegarAbaPorNome(String NomeDaAba) {
+	public static Tab PegarAbaPorNome(String NomeDaAba) {
 		Tab t = new Tab();
 
 		for (Tab i : abasefetivas) {
@@ -162,9 +171,9 @@ public class GraficoFXMLController implements Initializable {
 
 		return t;
 	}
-	public void SelecionarAbaPorNome(String NomeDaAba) {
+	public static void SelecionarAbaPorNome(String NomeDaAba) {
 		AbrirAbaPorNome(NomeDaAba);
-		abas.getSelectionModel().select(PegarAbaPorNome(NomeDaAba));
+		abasauxiliares.getSelectionModel().select(PegarAbaPorNome(NomeDaAba));
 	}
 	
 	//---Dados(De Jogar)---

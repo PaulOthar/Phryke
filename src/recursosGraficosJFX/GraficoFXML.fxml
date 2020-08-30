@@ -207,7 +207,7 @@
             </Tab>
             <Tab text="Consultar Super Peculiaridade">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane fx:id="ConsultarSuperPeculiaridade" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
             <Tab text="Consultar Peculiaridade">

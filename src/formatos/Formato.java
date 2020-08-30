@@ -1,7 +1,7 @@
 package formatos;
 
 public abstract class Formato {
-	public static final String primario = "¢", secundario = "#", terciario = "¬";
+	public static final String primario = "¢", secundario = "#", terciario = "¬",quaternario = "§",quinario = "²³",infinito = "£";
 
 	// Bem... todo Formato Vai ter nome, como Raca, Super Racas,
 	// Vantagens,Desvantagens, por ai vai...
@@ -19,5 +19,10 @@ public abstract class Formato {
 
 	public void setNome(String nome) {
 		Nome = nome;
+	}
+	
+	@Override
+	public String toString() {
+		return this.getNome();
 	}
 }

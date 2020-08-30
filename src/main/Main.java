@@ -1,6 +1,5 @@
 package main;
 
-import ferramentas.Mensageiro;
 import recursosGraficosJFX.InterfaceGrafica;
 
 //Classe Main deve ser usada apenas para trabalhar com recursos de instancia maior

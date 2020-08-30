@@ -15,8 +15,7 @@
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="recursosLogicosJFX.CriarSuperPeculiaridadeController">
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="recursosLogicosJFX.CriarSuperPeculiaridadeController">
    <children>
       <Accordion prefHeight="454.0" prefWidth="709.0">
          <panes>
@@ -80,7 +79,7 @@
                                        <children>
                                           <TextField fx:id="CriSuPePIUBN" layoutX="14.0" layoutY="14.0" promptText="Nome Da Peculiaridade" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
                                           <TextField fx:id="CriSuPePIUBVA" layoutX="189.0" layoutY="14.0" promptText="Valor Associado" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="10.0" />
-                                          <ComboBox fx:id="CriSuPePIUBS" layoutX="354.0" layoutY="14.0" onAction="#CriSuPePIUBS" prefWidth="150.0" promptText="Segmento" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="10.0" />
+                                          <ComboBox fx:id="CriSuPePIUBS" layoutX="354.0" layoutY="14.0" prefWidth="150.0" promptText="Segmento" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="10.0" />
                                           <HTMLEditor fx:id="CriSuPePIUBD" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutX="14.0" layoutY="81.0" prefHeight="229.0" prefWidth="687.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                                           <Label layoutX="14.0" layoutY="39.0" text="Detalhes Da Peculiaridade" AnchorPane.bottomAnchor="240.0" AnchorPane.leftAnchor="10.0" />
                                        </children>
@@ -150,12 +149,11 @@
                         </TableView>
                         <ComboBox fx:id="CriSuPePIP" layoutX="387.0" layoutY="63.0" prefWidth="150.0" promptText="Peculiaridade" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="60.0" />
                         <ComboBox fx:id="CriSuPePIS" layoutX="210.0" layoutY="55.0" prefWidth="150.0" promptText="Segmento" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="10.0" />
-                        <ComboBox fx:id="CriSuPePITDP" layoutX="119.0" layoutY="275.0" prefWidth="150.0" promptText="Tipo De Parâmetros" AnchorPane.bottomAnchor="115.0" AnchorPane.rightAnchor="170.0" />
+                        <ComboBox fx:id="CriSuPePITDP" layoutX="119.0" layoutY="275.0" prefWidth="150.0" promptText="Tipo De Parâmetros" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="170.0" />
                         <Label layoutX="387.0" layoutY="48.0" prefWidth="150.0" text="Peculiaridade" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="45.0" />
-                        <Label layoutX="390.0" layoutY="231.0" prefWidth="150.0" text="Tipo De Parâmetros" AnchorPane.bottomAnchor="140.0" AnchorPane.rightAnchor="170.0" />
-                        <Button layoutX="387.0" layoutY="275.0" mnemonicParsing="false" onAction="#CriSuPePIIP" prefWidth="150.0" text="Inserir Peculiaridade" AnchorPane.bottomAnchor="80.0" AnchorPane.rightAnchor="170.0" />
+                        <Label layoutX="387.0" layoutY="205.0" prefWidth="150.0" text="Tipo De Parâmetros" AnchorPane.bottomAnchor="105.0" AnchorPane.rightAnchor="170.0" />
+                        <Button layoutX="387.0" layoutY="275.0" mnemonicParsing="false" onAction="#CriSuPePIIP" prefWidth="150.0" text="Inserir Peculiaridade" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="170.0" />
                         <Button layoutX="403.0" layoutY="336.0" mnemonicParsing="false" onAction="#CriSuPePIRP" prefWidth="150.0" text="Remover Peculiaridade" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="170.0" />
-                        <Button layoutX="390.0" layoutY="306.0" mnemonicParsing="false" onAction="#CriSuPePIEP" prefWidth="150.0" text="Editar Peculiaridade" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="170.0" />
                         <ComboBox fx:id="CriSuPePIPU" layoutX="221.0" layoutY="61.0" prefWidth="150.0" promptText="Peculiaridade Única" AnchorPane.leftAnchor="221.0" AnchorPane.topAnchor="61.0" />
                         <Label layoutX="221.0" layoutY="46.0" text="Peculiaridade Única" AnchorPane.leftAnchor="221.0" AnchorPane.topAnchor="46.0" />
                         <Button layoutX="218.0" layoutY="261.0" mnemonicParsing="false" onAction="#CriSuPePIEPU" text="Editar Peculiaridade Única" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="220.0" />
